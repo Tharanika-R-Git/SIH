@@ -60,7 +60,7 @@ export default function DBTOfficialLogin() {
               <Shield className="w-12 h-12 text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">DBT Portal</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Jan Mithra</h1>
           <p className="text-gray-600 text-sm">Direct Benefit Transfer System</p>
           <p className="text-xs text-gray-500 mt-1">PCR Act & PoA Act Implementation</p>
         </div>
