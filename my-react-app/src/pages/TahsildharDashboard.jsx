@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { FileText, CheckCircle, XCircle, Clock, Search, Filter, Download, Shield, Bell, Settings, Menu, X, Home, BarChart3, Activity, Eye, AlertTriangle, ExternalLink, ArrowRight, User, MapPin, Calendar, Hash, FileCheck, Layers, Send, MessageSquare, CheckSquare, Moon, Sun, TrendingUp, TrendingDown } from 'lucide-react';
+import myLogo from '../assets/my-logo.png';
+import { FileText, CheckCircle, XCircle, Clock, Search, Filter, Download, Shield, Bell, Settings, Menu, X, Home, BarChart3, Activity, Eye, AlertTriangle, ExternalLink, ArrowRight, User, MapPin, Calendar, Hash, FileCheck, Layers, Send, MessageSquare, CheckSquare, Moon, Sun, TrendingUp, TrendingDown, Languages } from 'lucide-react';
 
 export default function TahsildarDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -9,6 +10,8 @@ export default function TahsildarDashboard() {
   const [comment, setComment] = useState('');
   const [actionType, setActionType] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   const pendingVerifications = [
     {
@@ -215,14 +218,13 @@ export default function TahsildarDashboard() {
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
-      {/* Top Navigation - Updated to match Police Dashboard */}
       <nav className={`${isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-300'} border-b`}>
         <div className="px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-blue-600 rounded flex items-center justify-center">
-                  <Shield className="w-6 h-6 text-white" />
+                <div className="w-10 h-10 flex items-center justify-center">
+                  <img src={myLogo} alt="Logo" className="w-10 h-10 object-contain" />
                 </div>
                 <div>
                   <h1 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>DBT Portal</h1>
@@ -247,6 +249,66 @@ export default function TahsildarDashboard() {
                   {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </button>
 
+                <div className="relative">
+                  <button
+                    onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                    className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
+                      isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <Languages className="w-5 h-5" />
+                    <span className="text-xs font-medium">{selectedLanguage === 'English' ? 'EN' : selectedLanguage === 'Tamil' ? 'த' : 'हि'}</span>
+                  </button>
+                  
+                  {showLanguageMenu && (
+                    <div className={`absolute right-0 mt-2 w-40 rounded-lg shadow-lg border z-50 ${
+                      isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+                    }`}>
+                      <div className="py-1">
+                        <button
+                          onClick={() => {
+                            setSelectedLanguage('English');
+                            setShowLanguageMenu(false);
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm ${
+                            selectedLanguage === 'English' 
+                              ? 'bg-green-50 text-green-700 font-semibold' 
+                              : isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-50'
+                          }`}
+                        >
+                          English
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedLanguage('Tamil');
+                            setShowLanguageMenu(false);
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm ${
+                            selectedLanguage === 'Tamil' 
+                              ? 'bg-green-50 text-green-700 font-semibold' 
+                              : isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-50'
+                          }`}
+                        >
+                          தமிழ் (Tamil)
+                        </button>
+                        <button
+                          onClick={() => {
+                            setSelectedLanguage('Hindi');
+                            setShowLanguageMenu(false);
+                          }}
+                          className={`w-full text-left px-4 py-2 text-sm ${
+                            selectedLanguage === 'Hindi' 
+                              ? 'bg-green-50 text-green-700 font-semibold' 
+                              : isDarkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-50'
+                          }`}
+                        >
+                          हिंदी (Hindi)
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 <button
                   className={`p-2 relative rounded transition-colors duration-200 ${
                     isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
@@ -268,11 +330,9 @@ export default function TahsildarDashboard() {
       </nav>
 
       <div className="flex">
-        {/* Sidebar */}
         <aside className={`${isSidebarOpen ? 'w-64' : 'w-0'} ${isDarkMode ? 'bg-gray-900' : 'bg-gray-900'} text-white transition-all duration-300 overflow-hidden min-h-screen`}>
           <div className="p-5">
             <div className="flex items-center space-x-3 mb-6 px-2">
-              
               
             </div>
 
@@ -316,7 +376,6 @@ export default function TahsildarDashboard() {
           </div>
         </aside>
 
-        {/* Main Content */}
         <main className="flex-1 p-6">
           {!selectedCase ? (
             <>

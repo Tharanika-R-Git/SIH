@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Shield, Bell, Settings, LogOut, Menu, X, FileText, CheckCircle, AlertTriangle, Clock, Search, Filter, Download, TrendingUp, Users, Activity, Eye, Edit, MessageSquare, Send, ExternalLink, ArrowRight, Home, BarChart3, ChevronRight, AlertCircle as AlertIcon, Hash, FileCheck, Layers, Moon, Sun } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import myLogo from '../assets/my-logo.png';
+import { Shield, Bell, Settings, LogOut, Menu, X, FileText, CheckCircle, AlertTriangle, Clock, Search, Filter, Download, TrendingUp, Users, Activity, Eye, Edit, MessageSquare, Send, ExternalLink, ArrowRight, Home, BarChart3, ChevronRight, AlertCircle as AlertIcon, Hash, FileCheck, Layers, Moon, Sun, Loader, Globe } from 'lucide-react';
 
 export default function PoliceDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -8,6 +9,8 @@ export default function PoliceDashboard() {
   const [showCommentBox, setShowCommentBox] = useState(false);
   const [comment, setComment] = useState('');
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [language, setLanguage] = useState('en'); // 'en', 'ta', 'hi'
 
   // Mock data for fast-track cases (ML Score ≥ 85)
   const fastTrackCases = [
@@ -155,6 +158,21 @@ export default function PoliceDashboard() {
     }
   ];
 
+  // Language options
+  const languages = [
+    { code: 'en', name: 'English', nativeName: 'English' },
+    { code: 'ta', name: 'Tamil', nativeName: 'தமிழ்' },
+    { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी' }
+  ];
+
+  // Add useEffect for loading simulation
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleAction = (action, caseId) => {
     alert(`Action: ${action} for case ${caseId}\n\nThis will trigger the workflow to Tahsildar for caste verification.`);
     if (action === 'verify') {
@@ -173,6 +191,26 @@ export default function PoliceDashboard() {
   const handleNavigation = (page) => {
     alert(`Navigating to ${page} page...`);
   };
+
+  const handleLanguageChange = (langCode) => {
+    setLanguage(langCode);
+    // In real app, you would update all text content based on selected language
+    console.log(`Language changed to: ${langCode}`);
+  };
+
+  // Loading Component
+  if (isLoading) {
+    return (
+      <div className={`flex items-center justify-center h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
+        <div className="text-center">
+          <Loader className="w-12 h-12 animate-spin mx-auto mb-4 text-blue-600" />
+          <p className={`text-lg font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   const CaseCard = ({ caseItem }) => (
     <div
@@ -245,8 +283,8 @@ export default function PoliceDashboard() {
       <aside className={`${isSidebarOpen ? 'w-64' : 'w-20'} bg-gray-900 text-white transition-all duration-300 flex flex-col`}>
         <div className="p-4 border-b border-gray-800">
           <div className="flex items-center space-x-3">
-            <div className="bg-blue-600 p-2 rounded">
-              <Shield className="w-6 h-6" />
+            <div className="w-10 h-10 flex items-center justify-center">
+              <img src={myLogo} alt="Logo" className="w-10 h-10 object-contain" />
             </div>
             {isSidebarOpen && <span className="font-bold text-lg">DBT Portal</span>}
           </div>
@@ -337,6 +375,40 @@ export default function PoliceDashboard() {
                       : 'border-gray-300'
                   }`}
                 />
+              </div>
+              
+              {/* Language Selector */}
+              <div className="relative group">
+                <button className={`p-2 rounded flex items-center space-x-1 ${
+                  isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                }`}>
+                  <Globe className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
+                  <span className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                    {language.toUpperCase()}
+                  </span>
+                </button>
+                
+                {/* Language Dropdown */}
+                <div className={`absolute right-0 top-12 w-48 py-2 rounded-lg shadow-lg border z-50 ${
+                  isDarkMode 
+                    ? 'bg-gray-800 border-gray-700' 
+                    : 'bg-white border-gray-200'
+                } hidden group-hover:block`}>
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => handleLanguageChange(lang.code)}
+                      className={`w-full px-4 py-2 text-left hover:bg-blue-600 hover:text-white flex items-center justify-between ${
+                        language === lang.code 
+                          ? 'bg-blue-600 text-white' 
+                          : isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                      }`}
+                    >
+                      <span>{lang.nativeName}</span>
+                      <span className="text-xs opacity-70">{lang.name}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
               
               {/* Dark Mode Toggle Button */}
@@ -536,7 +608,7 @@ export default function PoliceDashboard() {
               </div>
             </>
           ) : (
-            /* Detailed Case View - same content, cleaner design */
+            /* Detailed Case View */
             <div>
               <button
                 onClick={() => setSelectedCase(null)}
