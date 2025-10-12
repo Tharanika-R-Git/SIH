@@ -57,6 +57,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-left: -20px;
   }
 
   .logo-icon {
@@ -103,6 +104,24 @@
     width: 100%;
     height: 2px;
     background: #00c6ff;
+  }
+
+  .admin-login-btn {
+    background: transparent;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .admin-login-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
   }
 
   /* Admin Login Modal Styles */
@@ -514,11 +533,11 @@
   }
 
   .slide-1 {
-    background: linear-gradient(135deg, rgba(0, 31, 142, 0.9), rgba(0, 124, 145, 0.9));
+    background: linear-gradient(135deg, rgba(0, 31, 142, 0.95), rgba(0, 124, 145, 0.95));
   }
 
   .slide-2 {
-    background: linear-gradient(135deg, rgba(0, 31, 142, 0.85), rgba(0, 124, 145, 0.9));
+    background: linear-gradient(135deg, rgba(0, 31, 142, 0.92), rgba(0, 124, 145, 0.95));
   }
 
   .slide-content {
@@ -537,17 +556,21 @@
     font-size: 4rem;
     margin-bottom: 1.5rem;
     animation: fadeInUp 1s ease;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.7);
     line-height: 1.2;
+    color: #ffffff;
+    font-weight: 700;
   }
 
   .slide-content p {
     font-size: 1.5rem;
     margin-bottom: 2.5rem;
     max-width: 800px;
-    opacity: 0.95;
     animation: fadeInUp 1s ease 0.3s backwards;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    color: #f0f0f0;
+    font-weight: 500;
+    line-height: 1.6;
   }
 
   /* Slider Controls */
@@ -566,27 +589,6 @@
     transition: all 0.3s;
     z-index: 2;
   }
-/* Add this to your .jan-mithra-homepage CSS, inside the nav section */
-
-
-.admin-login-btn {
-  background: transparent;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 25px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.9rem;
-  white-space: nowrap;
-}
-
-.admin-login-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-2px);
-}
-
 
   .slider-arrow:hover {
     background: #00c6ff;
@@ -630,18 +632,17 @@
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #fff;
-    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   .section-subtitle {
     text-align: center;
-    color: #999;
+    color: #d0d0d0;
     margin-bottom: 4rem;
     font-size: 1.1rem;
+    font-weight: 400;
   }
 
   .services-grid {
@@ -706,11 +707,12 @@
   .service-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: #ffffff;
+    font-weight: 600;
   }
 
   .service-card p {
-    color: #999;
+    color: #c0c0c0;
     line-height: 1.8;
     margin-bottom: 1.5rem;
   }
@@ -786,14 +788,13 @@
     font-size: 3rem;
     margin-bottom: 1.5rem;
     line-height: 1.2;
-    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    font-weight: 700;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
   }
 
   .about-content p {
-    color: #999;
+    color: #c5c5c5;
     line-height: 1.8;
     margin-bottom: 2rem;
     font-size: 1.1rem;
@@ -875,38 +876,37 @@
   .feature-card h3 {
     font-size: 1.4rem;
     margin-bottom: 1rem;
-    color: #fff;
+    color: #ffffff;
+    font-weight: 600;
   }
 
   .feature-card p {
-    color: #999;
+    color: #c0c0c0;
     line-height: 1.7;
   }
 
   /* Contact Modal */
-  /* Change this */
-/* Replace with this */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(5px);
-}
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+  }
 
-.modal-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
+  .modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
 
   .contact-modal {
     background: #1a1d2e;
@@ -922,34 +922,30 @@
     border: 1px solid rgba(0, 198, 255, 0.2);
   }
 
-  .contact-modal-overlay.active .contact-modal {
+  .modal-overlay.active .contact-modal {
     transform: translateY(0);
     opacity: 1;
   }
 
   .close-modal {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-}
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
 
-.close-modal:hover {
-  background: rgba(0, 198, 255, 0.2);
-}
-
-  .contact-close-btn:hover {
+  .close-modal:hover {
     background: rgba(0, 198, 255, 0.2);
   }
 
@@ -959,19 +955,19 @@
     gap: 1.5rem;
   }
 
-  .contact-form-group {
+  .form-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .contact-form-group label {
+  .form-group label {
     color: #fff;
     font-weight: 500;
   }
 
-  .contact-form-group input,
-  .contact-form-group textarea {
+  .form-group input,
+  .form-group textarea {
     padding: 1rem;
     border: 1px solid #333;
     border-radius: 10px;
@@ -982,19 +978,19 @@
     font-family: inherit;
   }
 
-  .contact-form-group input:focus,
-  .contact-form-group textarea:focus {
+  .form-group input:focus,
+  .form-group textarea:focus {
     outline: none;
     border-color: #00c6ff;
     box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.2);
   }
 
-  .contact-form-group textarea {
+  .form-group textarea {
     resize: vertical;
     min-height: 120px;
   }
 
-  .contact-submit-btn {
+  .submit-btn {
     background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
     color: white;
     padding: 1rem 2rem;
@@ -1007,7 +1003,7 @@
     font-weight: 600;
   }
 
-  .contact-submit-btn:hover {
+  .submit-btn:hover {
     background: linear-gradient(135deg, #00b3e6 0%, #0066cc 100%);
     transform: scale(1.05);
     box-shadow: 0 10px 25px rgba(0, 198, 255, 0.4);
