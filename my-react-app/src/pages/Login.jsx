@@ -13,6 +13,7 @@ export default function DBTOfficialLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isErrorShaking, setIsErrorShaking] = useState(false);
 
   // ✅ Hardcoded credentials (replace with API integration later)
   const credentials = {
@@ -42,12 +43,29 @@ export default function DBTOfficialLogin() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const triggerErrorAnimation = () => {
+    setIsErrorShaking(true);
+    setTimeout(() => setIsErrorShaking(false), 400);
+  };
+
   const handleLogin = () => {
     setError('');
 
-    if (!officialType) return setError('Please select your department.');
-    if (!officialId.trim()) return setError('Please enter your Official ID.');
-    if (!password.trim()) return setError('Please enter your password.');
+    if (!officialType) {
+      setError('Please select your department.');
+      triggerErrorAnimation();
+      return;
+    }
+    if (!officialId.trim()) {
+      setError('Please enter your Official ID.');
+      triggerErrorAnimation();
+      return;
+    }
+    if (!password.trim()) {
+      setError('Please enter your password.');
+      triggerErrorAnimation();
+      return;
+    }
 
     const user = credentials[officialType];
     if (user && officialId === user.id && password === user.password) {
@@ -55,6 +73,7 @@ export default function DBTOfficialLogin() {
       setTimeout(() => navigate(user.path), 500);
     } else {
       setError('Invalid credentials. Please check your ID or password.');
+      triggerErrorAnimation();
     }
   };
 
@@ -71,43 +90,45 @@ export default function DBTOfficialLogin() {
       </div>
 
       {/* Login Card */}
-      <div className="w-full max-w-md relative z-10 animate-fadeIn">
+      <div className={`w-full max-w-md relative z-10 ${isErrorShaking ? 'animate-shake' : ''}`}>
         {/* Header */}
         <div className="text-center mb-8">
-          <img src={myLogo} alt="Logo" className="mx-auto mb-4 w-16 h-16" />
-          <h1 className="text-3xl font-bold text-gray-800 mb-1">Jan Mithra</h1>
-          <p className="text-gray-600 text-sm">Direct Benefit Transfer System</p>
-          <p className="text-xs text-gray-500 mt-1">PCR Act & PoA Act Implementation</p>
+          <div className="flex justify-center items-center mb-4">
+            <img src={myLogo} alt="Logo" className="w-16 h-16" />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">Jan Mithra</h1>
+          <p className="text-gray-600 text-sm mb-1">Direct Benefit Transfer System</p>
+          <p className="text-xs text-gray-500">PCR Act & PoA Act Implementation</p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100 transition-all hover:shadow-[0_0_20px_rgba(0,0,0,0.05)]">
-          <div className="mb-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-1">Official Login</h2>
-            <p className="text-sm text-gray-500">Access your department dashboard</p>
+        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+          <div className="mb-8 text-center">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Official Login</h2>
+            <p className="text-gray-500">Access your department dashboard</p>
           </div>
 
-          <div className="space-y-5">
+          <div className="space-y-6">
             {/* Department Dropdown */}
-            <div ref={dropdownRef}>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div ref={dropdownRef} className="w-full">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 Department / Role
               </label>
               <div className="relative">
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-left flex items-center justify-between transition-all"
+                  className="w-full px-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-left flex items-center justify-between transition-all hover:border-gray-400"
                   aria-haspopup="listbox"
                   aria-expanded={isDropdownOpen}
                 >
-                  <span className={officialType ? 'text-gray-900' : 'text-gray-400'}>
+                  <span className={officialType ? 'text-gray-900 font-medium' : 'text-gray-400'}>
                     {officialType
                       ? officialRoles.find((r) => r.value === officialType)?.label
                       : 'Select your department'}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-gray-400 transition-transform ${
+                    className={`w-5 h-5 text-gray-400 transition-transform duration-200 ${
                       isDropdownOpen ? 'rotate-180' : ''
                     }`}
                   />
@@ -115,7 +136,7 @@ export default function DBTOfficialLogin() {
 
                 {isDropdownOpen && (
                   <div
-                    className="absolute z-20 w-full mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden animate-slideDown"
+                    className="absolute z-20 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
                     role="listbox"
                   >
                     {officialRoles.map((role) => (
@@ -127,10 +148,10 @@ export default function DBTOfficialLogin() {
                           setIsDropdownOpen(false);
                           setError('');
                         }}
-                        className="w-full px-4 py-3 text-left hover:bg-gray-50 transition flex items-center space-x-3 border-b border-gray-100 last:border-b-0"
+                        className="w-full px-4 py-3.5 text-left hover:bg-gray-50 transition-colors flex items-center space-x-3 border-b border-gray-100 last:border-b-0"
                       >
                         <div className={`w-3 h-3 rounded-full ${role.color}`}></div>
-                        <span className="text-gray-700">{role.label}</span>
+                        <span className="text-gray-700 font-medium">{role.label}</span>
                       </button>
                     ))}
                   </div>
@@ -139,70 +160,74 @@ export default function DBTOfficialLogin() {
             </div>
 
             {/* Official ID */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Official ID</label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={officialId}
-                  onChange={(e) => {
-                    setOfficialId(e.target.value);
-                    setError('');
-                  }}
-                  placeholder="Enter your official ID"
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Password */}
-<div className="mb-4">
-      {/* Label */}
-      <label className="block text-sm font-medium text-gray-700 mb-2">
-        Password
-      </label>
-
-      {/* Input container */}
-      <div className="relative">
-        {/* Lock icon */}
-        <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-
-        {/* Password input */}
-        <input
-          type={showPassword ? "text" : "password"}
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-            setError("");
-          }}
-          onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-          placeholder="Enter your password"
-          className="w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
-        />
-
-        {/* Eye toggle button */}
-        <button
-          type="button"
-          onClick={() => setShowPassword(!showPassword)}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600"
-        >
-          {showPassword ? (
-            <EyeOff className="w-5 h-5" />
-          ) : (
-            <Eye className="w-5 h-5" />
-          )}
-        </button>
-      </div>
-
-      {/* Error message */}
-      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+<div className="w-full">
+  <label className="block text-sm font-medium text-gray-700 mb-3">
+    Official ID
+  </label>
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <User className="w-5 h-5 text-gray-400" />
     </div>
+    <input
+      type="text"
+      value={officialId}
+      onChange={(e) => {
+        setOfficialId(e.target.value);
+        setError('');
+      }}
+      onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+      placeholder="Enter your official ID"
+      className="w-full pl-10 pr-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-gray-400"
+    />
+  </div>
+</div>
 
-            {/* Sign In */}
+{/* Password */}
+<div className="w-full">
+  <label className="block text-sm font-medium text-gray-700 mb-3">
+    Password
+  </label>
+  <div className="relative">
+    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+      <Lock className="w-5 h-5 text-gray-400" />
+    </div>
+    <input
+      type={showPassword ? "text" : "password"}
+      value={password}
+      onChange={(e) => {
+        setPassword(e.target.value);
+        setError("");
+      }}
+      onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+      placeholder="Enter your password"
+      className="w-full pl-10 pr-12 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-gray-400"
+    />
+    <button
+      type="button"
+      onClick={() => setShowPassword(!showPassword)}
+      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+    >
+      {showPassword ? (
+        <EyeOff className="w-5 h-5" />
+      ) : (
+        <Eye className="w-5 h-5" />
+      )}
+    </button>
+  </div>
+</div>
+
+            {/* Error Message */}
+            {error && (
+              <div className="flex items-center space-x-3 text-red-600 bg-red-50 p-4 rounded-xl border border-red-200">
+                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                <span className="text-sm font-medium">{error}</span>
+              </div>
+            )}
+
+            {/* Sign In Button */}
             <button
               onClick={handleLogin}
-              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-3 rounded-lg font-semibold shadow-md hover:shadow-lg hover:from-orange-600 hover:to-orange-700 transform hover:-translate-y-0.5 transition-all"
+              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-orange-700 transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
             >
               Sign In
             </button>
@@ -210,25 +235,22 @@ export default function DBTOfficialLogin() {
         </div>
 
         {/* Footer */}
-        <div className="mt-6 text-center text-xs text-gray-500">
-          <p>Ministry of Social Justice & Empowerment</p>
-          <p className="text-gray-400 mt-1">Government of India | Secure Portal</p>
+        <div className="mt-8 text-center">
+          <p className="text-xs text-gray-500 font-medium">Ministry of Social Justice & Empowerment</p>
+          <p className="text-xs text-gray-400 mt-2">Government of India | Secure Portal</p>
         </div>
       </div>
 
       {/* Animations */}
       <style>{`
-        @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
-        @keyframes slideDown { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
         @keyframes shake {
-          10%, 90% { transform: translateX(-1px); }
-          20%, 80% { transform: translateX(2px); }
-          30%, 50%, 70% { transform: translateX(-4px); }
-          40%, 60% { transform: translateX(4px); }
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+          20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
-        .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
-        .animate-slideDown { animation: slideDown 0.2s ease-out; }
-        .animate-shake { animation: shake 0.4s ease-in-out; }
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
       `}</style>
     </div>
   );

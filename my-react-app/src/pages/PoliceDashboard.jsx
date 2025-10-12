@@ -379,14 +379,14 @@ export default function PoliceDashboard() {
               
               {/* Language Selector */}
               <div className="relative group">
-                <button className={`p-2 rounded flex items-center space-x-1 ${
-                  isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
-                }`}>
-                  <Globe className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
-                  <span className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {language.toUpperCase()}
-                  </span>
-                </button>
+                <button
+  onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+  className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
+    isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
+  }`}
+>
+  <Globe className="w-5 h-5" />
+</button>
                 
                 {/* Language Dropdown */}
                 <div className={`absolute right-0 top-12 w-48 py-2 rounded-lg shadow-lg border z-50 ${

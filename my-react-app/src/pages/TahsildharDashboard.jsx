@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import myLogo from '../assets/my-logo.png';
+import { Globe } from 'lucide-react';
 import { FileText, CheckCircle, XCircle, Clock, Search, Filter, Download, Shield, Bell, Settings, Menu, X, Home, BarChart3, Activity, Eye, AlertTriangle, ExternalLink, ArrowRight, User, MapPin, Calendar, Hash, FileCheck, Layers, Send, MessageSquare, CheckSquare, Moon, Sun, TrendingUp, TrendingDown, Languages } from 'lucide-react';
 
 export default function TahsildarDashboard() {
@@ -251,14 +252,13 @@ export default function TahsildarDashboard() {
 
                 <div className="relative">
                   <button
-                    onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-                    className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
-                      isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
-                    }`}
-                  >
-                    <Languages className="w-5 h-5" />
-                    <span className="text-xs font-medium">{selectedLanguage === 'English' ? 'EN' : selectedLanguage === 'Tamil' ? 'த' : 'हि'}</span>
-                  </button>
+  onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+  className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
+    isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
+  }`}
+>
+  <Globe className="w-5 h-5" />
+</button>
                   
                   {showLanguageMenu && (
                     <div className={`absolute right-0 mt-2 w-40 rounded-lg shadow-lg border z-50 ${
