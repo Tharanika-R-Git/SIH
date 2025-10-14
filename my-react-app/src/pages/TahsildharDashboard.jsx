@@ -106,6 +106,96 @@ export default function TahsildarDashboard() {
       ],
       verificationNotes: 'Caste certificate not available in DigiLocker. Manual verification required. Aadhaar needs verification.',
       issues: ['DigiLocker document not found', 'Aadhaar verification pending']
+    },
+    {
+      id: 'VER2024004',
+      requestDate: '2024-10-09 11:12:45',
+      firNumber: 'FIR2024004',
+      firDate: '2024-10-09',
+      policeStation: 'Coimbatore East PS',
+      victimName: 'Anitha R',
+      victimDOB: '05-11-1995',
+      aadhaarNumber: '1234 5678 9012',
+      aadhaarVerified: true,
+      caste: 'OBC',
+      subCaste: 'Vanniyar',
+      casteCertificateNumber: 'OBC/CBR/2020/00987',
+      certificateIssueDate: '20-02-2020',
+      issuingAuthority: 'Tahsildar, Coimbatore',
+      digiLockerStatus: 'verified',
+      revenueVillage: 'Karumathampatti',
+      taluk: 'Coimbatore',
+      district: 'Coimbatore',
+      requestedBy: 'SHO Priya Kumari (POL010)',
+      status: 'pending',
+      autoPopulated: false,
+      mlScore: 75,
+      documents: [
+        { name: 'Caste Certificate', source: 'Uploaded PDF', verified: false },
+        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
+        { name: 'FIR Copy', source: 'Police Portal', verified: true }
+      ],
+      verificationNotes: 'Caste certificate needs validation, submitted manually.'
+    },
+    {
+      id: 'VER2024005',
+      requestDate: '2024-10-09 13:50:05',
+      firNumber: 'FIR2024005',
+      firDate: '2024-10-08',
+      policeStation: 'Erode Central PS',
+      victimName: 'Selvam K',
+      victimDOB: '17-12-1987',
+      aadhaarNumber: '9876 5432 1098',
+      aadhaarVerified: false,
+      caste: 'SC',
+      subCaste: 'Paraiyar',
+      casteCertificateNumber: 'SC/ERE/2017/00543',
+      certificateIssueDate: '10-01-2017',
+      issuingAuthority: 'Tahsildar, Erode',
+      digiLockerStatus: 'partial',
+      revenueVillage: 'Veerappanchatiram',
+      taluk: 'Erode',
+      district: 'Erode',
+      requestedBy: 'SHO Raghavan (POL013)',
+      status: 'pending',
+      autoPopulated: false,
+      mlScore: 45,
+      documents: [
+        { name: 'Caste Certificate', source: 'DigiLocker', verified: false },
+        { name: 'Aadhaar Card', source: 'Manual Upload', verified: false }
+      ],
+      verificationNotes: 'Victim submitted manual aadhaar copy, needs verification. DigiLocker not accessible.'
+    },
+    {
+      id: 'VER2024006',
+      requestDate: '2024-10-09 09:20:30',
+      firNumber: 'FIR2024006',
+      firDate: '2024-10-08',
+      policeStation: 'Salem West PS',
+      victimName: 'Mathi V',
+      victimDOB: '23-04-2001',
+      aadhaarNumber: '5566 7788 9900',
+      aadhaarVerified: true,
+      caste: 'ST',
+      subCaste: 'Kattunayakan',
+      casteCertificateNumber: 'ST/SAL/2021/00101',
+      certificateIssueDate: '15-03-2021',
+      issuingAuthority: 'Tahsildar, Salem',
+      digiLockerStatus: 'verified',
+      revenueVillage: 'Yercaud',
+      taluk: 'Salem',
+      district: 'Salem',
+      requestedBy: 'SHO Murali (POL019)',
+      status: 'pending',
+      autoPopulated: true,
+      mlScore: 90,
+      documents: [
+        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
+        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
+        { name: 'FIR Copy', source: 'Police Portal', verified: true },
+        { name: 'Community Certificate', source: 'DigiLocker', verified: true }
+      ],
+      verificationNotes: 'Excellent data, nearly auto-verified. Minor manual check pending.'
     }
   ];
 
@@ -163,6 +253,10 @@ export default function TahsildarDashboard() {
         setShowCommentBox(false);
       }
     }
+  };
+
+  const handleViewDocument = (document) => {
+    alert(`Viewing document: ${document.name}\nSource: ${document.source}\nStatus: ${document.verified ? 'Verified' : 'Pending Verification'}`);
   };
 
   const fastTrackCases = pendingVerifications.filter(v => v.mlScore >= 85);
@@ -244,7 +338,7 @@ export default function TahsildarDashboard() {
                 <button 
                   onClick={() => setIsDarkMode(!isDarkMode)}
                   className={`p-2 rounded transition-colors duration-200 ${
-                    isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
+                    isDarkMode ? 'hover:bg-gray-700 text-yellow-400' : 'hover:bg-gray-100 text-gray-600'
                   }`}
                 >
                   {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -252,13 +346,13 @@ export default function TahsildarDashboard() {
 
                 <div className="relative">
                   <button
-  onClick={() => setShowLanguageMenu(!showLanguageMenu)}
-  className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
-    isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
-  }`}
->
-  <Globe className="w-5 h-5" />
-</button>
+                    onClick={() => setShowLanguageMenu(!showLanguageMenu)}
+                    className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
+                      isDarkMode ? 'hover:bg-gray-700 text-gray-300' : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <Globe className="w-5 h-5" />
+                  </button>
                   
                   {showLanguageMenu && (
                     <div className={`absolute right-0 mt-2 w-40 rounded-lg shadow-lg border z-50 ${
@@ -568,11 +662,24 @@ export default function TahsildarDashboard() {
                               <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>{doc.source}</p>
                             </div>
                           </div>
-                          {doc.verified ? (
-                            <CheckCircle className="w-5 h-5 text-green-500" />
-                          ) : (
-                            <Clock className="w-5 h-5 text-orange-500" />
-                          )}
+                          <div className="flex items-center space-x-2">
+                            {doc.verified ? (
+                              <CheckCircle className="w-5 h-5 text-green-500" />
+                            ) : (
+                              <Clock className="w-5 h-5 text-orange-500" />
+                            )}
+                            <button
+                              onClick={() => handleViewDocument(doc)}
+                              className={`p-2 rounded transition-colors ${
+                                isDarkMode 
+                                  ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' 
+                                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                              }`}
+                              title="View Document"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                          </div>
                         </div>
                       ))}
                     </div>

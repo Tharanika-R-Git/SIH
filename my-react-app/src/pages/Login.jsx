@@ -78,13 +78,13 @@ export default function DBTOfficialLogin() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-4 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4 relative overflow-hidden">
       {/* Pattern Background */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM6 4V0H4v4H0v2h4v4h2V6h4V4z'/%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2zM36 4V0h-2v4h-4v2h4v4h2V6h4V4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2zM6 4V0H4v4H0v2h4v4h2V6h4V4z'/%3E%3C/g%3E%3C/svg%3E")`,
           }}
         ></div>
       </div>
@@ -96,33 +96,33 @@ export default function DBTOfficialLogin() {
           <div className="flex justify-center items-center mb-4">
             <img src={myLogo} alt="Logo" className="w-16 h-16" />
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Jan Mithra</h1>
-          <p className="text-gray-600 text-sm mb-1">Direct Benefit Transfer System</p>
-          <p className="text-xs text-gray-500">PCR Act & PoA Act Implementation</p>
+          <h1 className="text-3xl font-bold text-white mb-2">Jan Mithra</h1>
+          <p className="text-gray-300 text-sm mb-1">Direct Benefit Transfer System</p>
+          <p className="text-xs text-gray-400">PCR Act & PoA Act Implementation</p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
+        <div className="bg-slate-800 rounded-2xl shadow-2xl p-8 border border-slate-700">
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Official Login</h2>
-            <p className="text-gray-500">Access your department dashboard</p>
+            <h2 className="text-2xl font-bold text-white mb-2">Official Login</h2>
+            <p className="text-gray-400">Access your department dashboard</p>
           </div>
 
           <div className="space-y-6">
             {/* Department Dropdown */}
             <div ref={dropdownRef} className="w-full">
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-sm font-medium text-gray-300 mb-3">
                 Department / Role
               </label>
               <div className="relative">
                 <button
                   type="button"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                  className="w-full px-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-white text-left flex items-center justify-between transition-all hover:border-gray-400"
+                  className="w-full px-4 py-3.5 border border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-slate-700 text-left flex items-center justify-between transition-all hover:border-slate-500"
                   aria-haspopup="listbox"
                   aria-expanded={isDropdownOpen}
                 >
-                  <span className={officialType ? 'text-gray-900 font-medium' : 'text-gray-400'}>
+                  <span className={officialType ? 'text-white font-medium' : 'text-gray-400'}>
                     {officialType
                       ? officialRoles.find((r) => r.value === officialType)?.label
                       : 'Select your department'}
@@ -136,7 +136,7 @@ export default function DBTOfficialLogin() {
 
                 {isDropdownOpen && (
                   <div
-                    className="absolute z-20 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
+                    className="absolute z-20 w-full mt-2 bg-slate-700 border border-slate-600 rounded-xl shadow-lg overflow-hidden"
                     role="listbox"
                   >
                     {officialRoles.map((role) => (
@@ -148,10 +148,10 @@ export default function DBTOfficialLogin() {
                           setIsDropdownOpen(false);
                           setError('');
                         }}
-                        className="w-full px-4 py-3.5 text-left hover:bg-gray-50 transition-colors flex items-center space-x-3 border-b border-gray-100 last:border-b-0"
+                        className="w-full px-4 py-3.5 text-left hover:bg-slate-600 transition-colors flex items-center space-x-3 border-b border-slate-600 last:border-b-0"
                       >
                         <div className={`w-3 h-3 rounded-full ${role.color}`}></div>
-                        <span className="text-gray-700 font-medium">{role.label}</span>
+                        <span className="text-gray-300 font-medium">{role.label}</span>
                       </button>
                     ))}
                   </div>
@@ -160,65 +160,65 @@ export default function DBTOfficialLogin() {
             </div>
 
             {/* Official ID */}
-<div className="w-full">
-  <label className="block text-sm font-medium text-gray-700 mb-3">
-    Official ID
-  </label>
-  <div className="relative">
-    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <User className="w-5 h-5 text-gray-400" />
-    </div>
-    <input
-      type="text"
-      value={officialId}
-      onChange={(e) => {
-        setOfficialId(e.target.value);
-        setError('');
-      }}
-      onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
-      placeholder="Enter your official ID"
-      className="w-full pl-10 pr-4 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-gray-400"
-    />
-  </div>
-</div>
+            <div className="w-full">
+              <label className="block text-sm font-medium text-gray-300 mb-3">
+                Official ID
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <User className="w-5 h-5 text-gray-400" />
+                </div>
+                <input
+                  type="text"
+                  value={officialId}
+                  onChange={(e) => {
+                    setOfficialId(e.target.value);
+                    setError('');
+                  }}
+                  onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
+                  placeholder="Enter your official ID"
+                  className="w-full pl-10 pr-4 py-3.5 border border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-slate-700 text-white placeholder-gray-400 transition-all hover:border-slate-500"
+                />
+              </div>
+            </div>
 
-{/* Password */}
-<div className="w-full">
-  <label className="block text-sm font-medium text-gray-700 mb-3">
-    Password
-  </label>
-  <div className="relative">
-    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <Lock className="w-5 h-5 text-gray-400" />
-    </div>
-    <input
-      type={showPassword ? "text" : "password"}
-      value={password}
-      onChange={(e) => {
-        setPassword(e.target.value);
-        setError("");
-      }}
-      onKeyDown={(e) => e.key === "Enter" && handleLogin()}
-      placeholder="Enter your password"
-      className="w-full pl-10 pr-12 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all hover:border-gray-400"
-    />
-    <button
-      type="button"
-      onClick={() => setShowPassword(!showPassword)}
-      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
-    >
-      {showPassword ? (
-        <EyeOff className="w-5 h-5" />
-      ) : (
-        <Eye className="w-5 h-5" />
-      )}
-    </button>
-  </div>
-</div>
+            {/* Password */}
+            <div className="w-full">
+              <label className="block text-sm font-medium text-gray-300 mb-3">
+                Password
+              </label>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <Lock className="w-5 h-5 text-gray-400" />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setError("");
+                  }}
+                  onKeyDown={(e) => e.key === "Enter" && handleLogin()}
+                  placeholder="Enter your password"
+                  className="w-full pl-10 pr-12 py-3.5 border border-slate-600 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent bg-slate-700 text-white placeholder-gray-400 transition-all hover:border-slate-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-300 transition-colors"
+                >
+                  {showPassword ? (
+                    <EyeOff className="w-5 h-5" />
+                  ) : (
+                    <Eye className="w-5 h-5" />
+                  )}
+                </button>
+              </div>
+            </div>
 
             {/* Error Message */}
             {error && (
-              <div className="flex items-center space-x-3 text-red-600 bg-red-50 p-4 rounded-xl border border-red-200">
+              <div className="flex items-center space-x-3 text-red-400 bg-red-900/20 p-4 rounded-xl border border-red-800">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
                 <span className="text-sm font-medium">{error}</span>
               </div>
@@ -227,7 +227,7 @@ export default function DBTOfficialLogin() {
             {/* Sign In Button */}
             <button
               onClick={handleLogin}
-              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-orange-700 transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+              className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl hover:from-orange-600 hover:to-orange-700 transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-800"
             >
               Sign In
             </button>
@@ -236,8 +236,8 @@ export default function DBTOfficialLogin() {
 
         {/* Footer */}
         <div className="mt-8 text-center">
-          <p className="text-xs text-gray-500 font-medium">Ministry of Social Justice & Empowerment</p>
-          <p className="text-xs text-gray-400 mt-2">Government of India | Secure Portal</p>
+          <p className="text-xs text-gray-400 font-medium">Ministry of Social Justice & Empowerment</p>
+          <p className="text-xs text-gray-500 mt-2">Government of India | Secure Portal</p>
         </div>
       </div>
 

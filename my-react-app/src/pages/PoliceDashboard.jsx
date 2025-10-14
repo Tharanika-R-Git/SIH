@@ -46,6 +46,68 @@ export default function PoliceDashboard() {
       }
     },
     {
+    id: 'FIR2024005',
+    date: '2024-10-09',
+    incidentDate: '2024-10-06',
+    ps: 'Coimbatore North PS',
+    victimName: 'Anita Ramesh',
+    victimAge: 33,
+    victimGender: 'Female',
+    caste: 'SC',
+    mlScore: 95,
+    status: 'pending',
+    type: 'Physical Assault',
+    section: 'Section 3(1)(x) of SC/ST Act',
+    details: 'Victim attacked on her way home by neighbors who verbally abused and physically assaulted her due to caste identity. Incident witnessed by local shopkeepers.',
+    accusedName: 'Neighboring Youths',
+    documents: ['FIR Copy', 'Medical Report', 'Witness Statement', 'Photo Evidence'],
+    tamperCheck: 'Pass',
+    ocrConfidence: 96,
+    extractedText: {
+      firNumber: 'FIR2024005',
+      policeStation: 'Coimbatore North PS',
+      date: '2024-10-09 08:45 AM',
+      victimStatement: 'I was attacked by a group of youths while returning home. They insulted me and physically assaulted me. Several people saw the incident.'
+    },
+    metadata: {
+      documentHash: 'e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7',
+      uploadTime: '2024-10-09 10:12:45 IST',
+      fileSize: '2.6 MB',
+      pages: 5
+    }
+  },
+  {
+    id: 'FIR2024006',
+    date: '2024-10-09',
+    incidentDate: '2024-10-07',
+    ps: 'Erode PS',
+    victimName: 'Rajeshwari Devi',
+    victimAge: 38,
+    victimGender: 'Female',
+    caste: 'ST',
+    mlScore: 89,
+    status: 'pending',
+    type: 'Denial of Service',
+    section: 'Section 3(1)(r) of SC/ST Act',
+    details: 'Victim denied access to village market and community water sources due to tribal identity. Locals threatened her when she attempted to enter.',
+    accusedName: 'Local Market Committee',
+    documents: ['FIR Copy', 'Photo Evidence', 'Video Recording'],
+    tamperCheck: 'Pass',
+    ocrConfidence: 92,
+    extractedText: {
+      firNumber: 'FIR2024006',
+      policeStation: 'Erode PS',
+      date: '2024-10-09 01:20 PM',
+      victimStatement: 'I was not allowed to access the market and water facility. The accused warned me to stay away from public areas.'
+    },
+    metadata: {
+      documentHash: 'f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1',
+      uploadTime: '2024-10-09 14:30:10 IST',
+      fileSize: '3.0 MB',
+      pages: 4
+    }
+  },
+    {
       id: 'FIR2024002',
       date: '2024-10-07',
       incidentDate: '2024-10-04',
@@ -155,7 +217,82 @@ export default function PoliceDashboard() {
         fileSize: '1.2 MB',
         pages: 3
       }
+
+    },
+     {
+    id: 'FIR2024007',
+    date: '2024-10-08',
+    incidentDate: '2024-10-03',
+    ps: 'Udumalpet PS',
+    victimName: 'Karthik Suresh',
+    victimAge: 45,
+    victimGender: 'Male',
+    caste: 'SC',
+    mlScore: 63,
+    status: 'review',
+    type: 'Property Damage',
+    section: 'Section 3(1)(xi) of SC/ST Act',
+    details: 'Agricultural property destroyed by neighbors due to caste-based dispute. Fencing damaged and crops destroyed.',
+    accusedName: 'Neighboring Landlord',
+    documents: ['FIR Copy (Incomplete)', 'Photo Evidence', 'Property Papers'],
+    tamperCheck: 'Warning',
+    ocrConfidence: 70,
+    anomalies: [
+      'Missing victim signature on FIR',
+      'Inconsistent incident date in complaint and photos',
+      'Partial extraction of victim statement'
+    ],
+    missingDocs: ['Medical Certificate', 'Witness Statements', 'Property Valuation Report'],
+    extractedText: {
+      firNumber: 'FIR2024007',
+      policeStation: 'Udumalpet PS',
+      date: '2024-10-08 11:00 AM',
+      victimStatement: '[Partial] My farm and house fencing were damaged by neighbors due to caste issues...'
+    },
+    metadata: {
+      documentHash: 'g9b2c5d8e1f4a7b0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2',
+      uploadTime: '2024-10-08 12:20:30 IST',
+      fileSize: '2.0 MB',
+      pages: 6
     }
+  },
+  {
+    id: 'FIR2024008',
+    date: '2024-10-07',
+    incidentDate: '2024-10-01',
+    ps: 'Karur PS',
+    victimName: 'Meena Lakshmi',
+    victimAge: 31,
+    victimGender: 'Female',
+    caste: 'ST',
+    mlScore: 59,
+    status: 'review',
+    type: 'Verbal Abuse & Threats',
+    section: 'Section 3(1)(s) of SC/ST Act',
+    details: 'Victim verbally abused with casteist slurs in public by shopkeepers. Threatened with physical harm if she reported incident.',
+    accusedName: 'Local Shopkeepers',
+    documents: ['FIR Copy', 'Photo Evidence'],
+    tamperCheck: 'Pass',
+    ocrConfidence: 60,
+    anomalies: [
+      'Low-quality scan of FIR (60% confidence)',
+      'Missing signature and timestamp',
+      'Victim statement partially missing'
+    ],
+    missingDocs: ['Audio/Video Evidence', 'Medical Report', 'Witness Statements'],
+    extractedText: {
+      firNumber: 'FIR2024008',
+      policeStation: 'Karur PS',
+      date: '2024-10-07 09:40 AM',
+      victimStatement: '[Low confidence] I was verbally threatened and abused by the shopkeepers...'
+    },
+    metadata: {
+      documentHash: 'h0c3d6e9f2a5b8c1d4e7f0a3b6c9d2e5f8a1b4c7d0e3f6a9b2c5d8e1f4a7b0c3',
+      uploadTime: '2024-10-07 10:50:12 IST',
+      fileSize: '1.5 MB',
+      pages: 4
+    }
+  }
   ];
 
   // Language options
@@ -169,7 +306,7 @@ export default function PoliceDashboard() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 0);
     return () => clearTimeout(timer);
   }, []);
 

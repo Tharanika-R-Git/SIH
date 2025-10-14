@@ -2,11 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 import myLogo from '../assets/my-logo.png';
+import indiaMap from '../assets/india.png'; // Import the India map image
 import { Shield, Lock, User, AlertCircle, ChevronDown, Eye, EyeOff, X } from 'lucide-react';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const mapRef = useRef(null);
+  const mapInstanceRef = useRef(null);
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [visitorCount, setVisitorCount] = useState(245678);
@@ -72,9 +75,8 @@ const LandingPage = () => {
 
   // Handle admin login modal
   const handleAdminLogin = () => {
-  navigate('/login');
-};
-
+    navigate('/login');
+  };
 
   const closeLoginModal = () => {
     setIsLoginModalOpen(false);
@@ -111,9 +113,7 @@ const LandingPage = () => {
 
     const user = credentials[officialType];
     if (user && officialId === user.id && password === user.password) {
-      // Only close modal, no navigation
       closeLoginModal();
-      // You can add a success message or other feedback here
       console.log('Login successful for:', officialType);
     } else {
       setLoginError('Invalid credentials. Please check your ID or password.');
@@ -500,7 +500,6 @@ const LandingPage = () => {
         </button>
       </nav>
 
-      {/* Rest of your existing landing page content remains exactly the same */}
       {/* Hero Slider */}
       <section className="hero-slider" id="home">
         {slides.map((slide, index) => (
@@ -577,7 +576,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* About Section with Gallery */}
+      {/* About Section with India Map Image */}
       <section className="about-section" id="about">
         <div className="about-grid">
           <div className="about-content">
@@ -588,13 +587,18 @@ const LandingPage = () => {
               Get Started
             </button>
           </div>
-          <div className="about-gallery">
-            <div className="gallery-img" aria-label="Mobile application">📱</div>
-            <div className="gallery-img" aria-label="Security features">🔐</div>
-            <div className="gallery-img" aria-label="Analytics dashboard">📊</div>
-            <div className="gallery-img" aria-label="Fund disbursement">💰</div>
-            <div className="gallery-img" aria-label="User support">👥</div>
-            <div className="gallery-img" aria-label="Verification system">✓</div>
+          <div className="about-map-container">
+            <img 
+              src={indiaMap} 
+              alt="India Map - Empowering Justice Across India" 
+              className="india-map-image"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: '15px'
+              }}
+            />
           </div>
         </div>
       </section>

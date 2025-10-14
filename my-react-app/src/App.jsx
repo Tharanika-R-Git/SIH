@@ -4,7 +4,7 @@ import Login from "./pages/Login";
 import PoliceDashboard from "./pages/PoliceDashboard";
 import TahsildarDashboard from "./pages/TahsildharDashboard";
 import TreasuryDBTPortal from "./pages/TreasuryDashboard";
-
+import WelfarePortal from "./pages/WelfareDashboard";
 function App() {
   return (
     <Router>
@@ -14,6 +14,7 @@ function App() {
         <Route path="/police-dashboard" element={<PoliceDashboard />} />
         <Route path="/tahsildar-dashboard" element={<TahsildarDashboard />} />
         <Route path="/treasury-dashboard" element={<TreasuryDBTPortal />} />
+        <Route path="/welfare-dashboard" element={<WelfarePortal />} />
       </Routes>
     </Router>
   );
