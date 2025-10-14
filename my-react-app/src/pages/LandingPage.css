@@ -1226,5 +1226,62 @@
       padding: 1rem 2rem;
       font-size: 1rem;
     }
+    /* Scrolling Icons Section */
+.scrolling-icons-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 3rem 0;
+}
+
+.scrolling-icons-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.scrolling-icons-title {
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.scrolling-icons-track {
+  overflow: hidden;
+  display: flex;
+  gap: 30px;
+  cursor: grab;
+  padding: 1rem 0;
+}
+
+.scrolling-icon-box {
+  min-width: 120px;
+  height: 120px;
+  background: white;
+  border-radius: 12px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.scrolling-icon-box:hover {
+  transform: scale(1.1);
+}
+
+.scrolling-icon-box img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+}
+
+.icon-placeholder {
+  color: #667eea;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
   }
 }

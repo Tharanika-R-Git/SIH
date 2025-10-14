@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import myLogo from '../assets/my-logo.png';
 import { Globe } from 'lucide-react';
-import { FileText, CheckCircle, XCircle, Clock, Search, Filter, Download, Shield, Bell, Settings, Menu, X, Home, BarChart3, Activity, Eye, AlertTriangle, ExternalLink, ArrowRight, User, MapPin, Calendar, Hash, FileCheck, Layers, Send, MessageSquare, CheckSquare, Moon, Sun, TrendingUp, TrendingDown, Languages } from 'lucide-react';
+import { FileText, CheckCircle, XCircle, Clock, Search, Filter, Download, Shield, Bell, Settings, Menu, X, Home, BarChart3, Activity, Eye, AlertTriangle, ExternalLink, ArrowRight, User, MapPin, Calendar, Hash, FileCheck, Layers, Send, MessageSquare, CheckSquare, Moon, Sun, TrendingUp, TrendingDown, Languages, LogOut } from 'lucide-react';
 
 export default function TahsildarDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -196,6 +196,128 @@ export default function TahsildarDashboard() {
         { name: 'Community Certificate', source: 'DigiLocker', verified: true }
       ],
       verificationNotes: 'Excellent data, nearly auto-verified. Minor manual check pending.'
+    },
+    // Additional FIR Cases
+    {
+      id: 'VER2024007',
+      requestDate: '2024-10-09 14:30:15',
+      firNumber: 'FIR2024007',
+      firDate: '2024-10-08',
+      policeStation: 'Madurai Central PS',
+      victimName: 'Karthik M',
+      victimDOB: '30-07-1990',
+      aadhaarNumber: '6677 8899 0011',
+      aadhaarVerified: true,
+      caste: 'SC',
+      subCaste: 'Arunthathiyar',
+      casteCertificateNumber: 'SC/MDU/2019/00321',
+      certificateIssueDate: '25-08-2019',
+      issuingAuthority: 'Tahsildar, Madurai',
+      digiLockerStatus: 'verified',
+      revenueVillage: 'Madurai Central',
+      taluk: 'Madurai',
+      district: 'Madurai',
+      requestedBy: 'SHO Senthil (POL025)',
+      status: 'pending',
+      autoPopulated: true,
+      mlScore: 85,
+      documents: [
+        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
+        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
+        { name: 'FIR Copy', source: 'Police Portal', verified: true }
+      ],
+      verificationNotes: 'All documents verified through DigiLocker. Ready for approval.'
+    },
+    {
+      id: 'VER2024008',
+      requestDate: '2024-10-09 10:45:20',
+      firNumber: 'FIR2024008',
+      firDate: '2024-10-07',
+      policeStation: 'Trichy West PS',
+      victimName: 'Geetha R',
+      victimDOB: '12-11-1985',
+      aadhaarNumber: '7788 9900 1122',
+      aadhaarVerified: false,
+      caste: 'ST',
+      subCaste: 'Malayali',
+      casteCertificateNumber: 'ST/TRY/2020/00567',
+      certificateIssueDate: '18-06-2020',
+      issuingAuthority: 'Tahsildar, Trichy',
+      digiLockerStatus: 'partial',
+      revenueVillage: 'Srirangam',
+      taluk: 'Trichy',
+      district: 'Trichy',
+      requestedBy: 'SHO Anand (POL032)',
+      status: 'pending',
+      autoPopulated: false,
+      mlScore: 60,
+      documents: [
+        { name: 'Caste Certificate', source: 'Uploaded PDF', verified: false },
+        { name: 'Aadhaar Card', source: 'Manual Upload', verified: false },
+        { name: 'FIR Copy', source: 'Police Portal', verified: true }
+      ],
+      verificationNotes: 'Manual verification required for caste certificate and Aadhaar.',
+      issues: ['Manual document submission', 'Aadhaar verification pending']
+    },
+    {
+      id: 'VER2024009',
+      requestDate: '2024-10-09 16:20:45',
+      firNumber: 'FIR2024009',
+      firDate: '2024-10-09',
+      policeStation: 'Chennai Central PS',
+      victimName: 'Arun Kumar',
+      victimDOB: '08-03-1992',
+      aadhaarNumber: '8899 0011 2233',
+      aadhaarVerified: true,
+      caste: 'OBC',
+      subCaste: 'Vanniyar',
+      casteCertificateNumber: 'OBC/CHN/2021/00876',
+      certificateIssueDate: '30-04-2021',
+      issuingAuthority: 'Tahsildar, Chennai',
+      digiLockerStatus: 'verified',
+      revenueVillage: 'T Nagar',
+      taluk: 'Chennai',
+      district: 'Chennai',
+      requestedBy: 'SHO Vasanth (POL045)',
+      status: 'pending',
+      autoPopulated: true,
+      mlScore: 89,
+      documents: [
+        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
+        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
+        { name: 'FIR Copy', source: 'Police Portal', verified: true }
+      ],
+      verificationNotes: 'All documents verified. High confidence score.'
+    },
+    {
+      id: 'VER2024010',
+      requestDate: '2024-10-09 12:15:30',
+      firNumber: 'FIR2024010',
+      firDate: '2024-10-08',
+      policeStation: 'Coimbatore North PS',
+      victimName: 'Priya S',
+      victimDOB: '19-09-1998',
+      aadhaarNumber: '9900 1122 3344',
+      aadhaarVerified: true,
+      caste: 'SC',
+      subCaste: 'Devendrakula Vellalar',
+      casteCertificateNumber: 'SC/CBR/2022/00234',
+      certificateIssueDate: '12-03-2022',
+      issuingAuthority: 'Tahsildar, Coimbatore North',
+      digiLockerStatus: 'verified',
+      revenueVillage: 'Gandhipuram',
+      taluk: 'Coimbatore',
+      district: 'Coimbatore',
+      requestedBy: 'SHO Rajesh (POL028)',
+      status: 'pending',
+      autoPopulated: true,
+      mlScore: 91,
+      documents: [
+        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
+        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
+        { name: 'FIR Copy', source: 'Police Portal', verified: true }
+      ],
+      verificationNotes: 'Complete document verification. Ready for fast-track approval.'
     }
   ];
 
@@ -257,6 +379,13 @@ export default function TahsildarDashboard() {
 
   const handleViewDocument = (document) => {
     alert(`Viewing document: ${document.name}\nSource: ${document.source}\nStatus: ${document.verified ? 'Verified' : 'Pending Verification'}`);
+  };
+
+  const handleLogout = () => {
+    
+      // Redirect to login page - you can replace this with your actual login page route
+      window.location.href = '/login';
+    
   };
 
   const fastTrackCases = pendingVerifications.filter(v => v.mlScore >= 85);
@@ -410,6 +539,17 @@ export default function TahsildarDashboard() {
                 >
                   <Bell className="w-5 h-5" />
                   <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+
+                {/* Logout Button */}
+                <button
+                  onClick={handleLogout}
+                  className={`p-2 rounded transition-colors duration-200 flex items-center space-x-1 ${
+                    isDarkMode ? 'hover:bg-gray-700 text-red-400' : 'hover:bg-gray-100 text-red-600'
+                  }`}
+                  title="Logout"
+                >
+                  <LogOut className="w-5 h-5" />
                 </button>
 
                 <div className="flex items-center space-x-2">
@@ -670,14 +810,14 @@ export default function TahsildarDashboard() {
                             )}
                             <button
                               onClick={() => handleViewDocument(doc)}
-                              className={`p-2 rounded transition-colors ${
+                              className={`px-3 py-2 rounded text-sm font-medium flex items-center space-x-1 transition-colors ${
                                 isDarkMode 
-                                  ? 'bg-gray-700 hover:bg-gray-600 text-gray-300' 
-                                  : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                                  : 'bg-blue-600 hover:bg-blue-700 text-white'
                               }`}
-                              title="View Document"
                             >
                               <Eye className="w-4 h-4" />
+                              <span>View</span>
                             </button>
                           </div>
                         </div>

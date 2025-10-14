@@ -96,7 +96,7 @@ export default function DBTOfficialLogin() {
           <div className="flex justify-center items-center mb-4">
             <img src={myLogo} alt="Logo" className="w-16 h-16" />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">Jan Mithra</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">Jan Mitra</h1>
           <p className="text-gray-300 text-sm mb-1">Direct Benefit Transfer System</p>
           <p className="text-xs text-gray-400">PCR Act & PoA Act Implementation</p>
         </div>

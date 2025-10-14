@@ -254,7 +254,7 @@ const LandingPage = () => {
 
   const footerLinks = {
     about: {
-      title: 'Jan Mithra',
+      title: 'Jan Mitra',
       description: 'The Direct Benefit Transfer Portal is a mission-mode project ensuring transparent and timely delivery of benefits under PCR Act, 1955 and PoA Act, 1989.'
     },
     quickLinks: ['Home', 'About Portal', 'Apply Online', 'Track Application', 'Guidelines & Forms', 'Help & Support'],
@@ -292,7 +292,7 @@ const LandingPage = () => {
             <div className="login-modal-header">
               <img src={myLogo} alt="Logo" className="login-modal-logo" />
               <div className="login-modal-title">
-                <h2>Jan Mithra</h2>
+                <h2>Jan Mitra</h2>
                 <p>Official Portal Login</p>
                 <span>PCR Act & PoA Act Implementation</span>
               </div>
@@ -483,7 +483,7 @@ const LandingPage = () => {
         <div className="logo">
           <img src={myLogo} alt="Jan Mithra Logo" className="logo-icon" />
           <div className="logo-text">
-            <h1>Jan Mithra</h1>
+            <h1>Jan Mitra</h1>
             <p>Ministry of Social Justice & Empowerment</p>
           </div>
         </div>
