@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import myLogo from '../assets/my-logo.png';
 import { Shield, Bell, Settings, LogOut, Menu, X, FileText, CheckCircle, AlertTriangle, Clock, Search, Filter, Download, TrendingUp, Users, Activity, Eye, Edit, MessageSquare, Send, ExternalLink, ArrowRight, Home, BarChart3, ChevronRight, AlertCircle as AlertIcon, Hash, FileCheck, Layers, Moon, Sun, Loader, Globe, User, Mail, Phone, MapPin, Calendar, Badge, Award, Shield as ShieldIcon } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function PoliceDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -555,13 +556,16 @@ export default function PoliceDashboard() {
     // In real app, you would update all text content based on selected language
     console.log(`Language changed to: ${langCode}`);
   };
+const navigate = useNavigate();
 
- const handleLogout = () => {
- 
-
-    // Use window.location.href for actual redirection
-    window.location.href = '/Login';
-  
+const handleLogout = () => {
+  if (window.confirm('Are you sure you want to logout?')) {
+    alert('Logging out... Redirecting to login page.');
+    navigate('/Login');
+    // In real app, you would also clear authentication tokens here
+    // localStorage.removeItem('authToken');
+    // sessionStorage.clear();
+  }
 };
 
   // Loading Component
