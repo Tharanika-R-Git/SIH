@@ -13,6 +13,7 @@ export default function TahsildarDashboard() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [activeView, setActiveView] = useState('dashboard');
 
   const pendingVerifications = [
     {
@@ -108,216 +109,134 @@ export default function TahsildarDashboard() {
       issues: ['DigiLocker document not found', 'Aadhaar verification pending']
     },
     {
-      id: 'VER2024004',
-      requestDate: '2024-10-09 11:12:45',
-      firNumber: 'FIR2024004',
+      id: 'VER2024011',
+      requestDate: '2024-10-10 09:15:30',
+      firNumber: 'FIR/2024/0456/TRP',
       firDate: '2024-10-09',
-      policeStation: 'Coimbatore East PS',
-      victimName: 'Anitha R',
-      victimDOB: '05-11-1995',
-      aadhaarNumber: '1234 5678 9012',
+      policeStation: 'Tiruppur Town PS',
+      victimName: 'Santhosh Kumar',
+      victimDOB: '12-08-1991',
+      aadhaarNumber: '3456 7890 1234',
       aadhaarVerified: true,
-      caste: 'OBC',
-      subCaste: 'Vanniyar',
-      casteCertificateNumber: 'OBC/CBR/2020/00987',
-      certificateIssueDate: '20-02-2020',
-      issuingAuthority: 'Tahsildar, Coimbatore',
-      digiLockerStatus: 'verified',
-      revenueVillage: 'Karumathampatti',
-      taluk: 'Coimbatore',
-      district: 'Coimbatore',
-      requestedBy: 'SHO Priya Kumari (POL010)',
-      status: 'pending',
-      autoPopulated: false,
-      mlScore: 75,
-      documents: [
-        { name: 'Caste Certificate', source: 'Uploaded PDF', verified: false },
-        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
-        { name: 'FIR Copy', source: 'Police Portal', verified: true }
-      ],
-      verificationNotes: 'Caste certificate needs validation, submitted manually.'
-    },
-    {
-      id: 'VER2024005',
-      requestDate: '2024-10-09 13:50:05',
-      firNumber: 'FIR2024005',
-      firDate: '2024-10-08',
-      policeStation: 'Erode Central PS',
-      victimName: 'Selvam K',
-      victimDOB: '17-12-1987',
-      aadhaarNumber: '9876 5432 1098',
-      aadhaarVerified: false,
       caste: 'SC',
-      subCaste: 'Paraiyar',
-      casteCertificateNumber: 'SC/ERE/2017/00543',
-      certificateIssueDate: '10-01-2017',
-      issuingAuthority: 'Tahsildar, Erode',
-      digiLockerStatus: 'partial',
-      revenueVillage: 'Veerappanchatiram',
-      taluk: 'Erode',
-      district: 'Erode',
-      requestedBy: 'SHO Raghavan (POL013)',
-      status: 'pending',
-      autoPopulated: false,
-      mlScore: 45,
-      documents: [
-        { name: 'Caste Certificate', source: 'DigiLocker', verified: false },
-        { name: 'Aadhaar Card', source: 'Manual Upload', verified: false }
-      ],
-      verificationNotes: 'Victim submitted manual aadhaar copy, needs verification. DigiLocker not accessible.'
-    },
-    {
-      id: 'VER2024006',
-      requestDate: '2024-10-09 09:20:30',
-      firNumber: 'FIR2024006',
-      firDate: '2024-10-08',
-      policeStation: 'Salem West PS',
-      victimName: 'Mathi V',
-      victimDOB: '23-04-2001',
-      aadhaarNumber: '5566 7788 9900',
-      aadhaarVerified: true,
-      caste: 'ST',
-      subCaste: 'Kattunayakan',
-      casteCertificateNumber: 'ST/SAL/2021/00101',
-      certificateIssueDate: '15-03-2021',
-      issuingAuthority: 'Tahsildar, Salem',
+      subCaste: 'Pallar',
+      casteCertificateNumber: 'SC/TRP/2019/03456',
+      certificateIssueDate: '15-07-2019',
+      issuingAuthority: 'Tahsildar, Tiruppur',
       digiLockerStatus: 'verified',
-      revenueVillage: 'Yercaud',
-      taluk: 'Salem',
-      district: 'Salem',
-      requestedBy: 'SHO Murali (POL019)',
+      revenueVillage: 'Tiruppur Town',
+      taluk: 'Tiruppur',
+      district: 'Tiruppur',
+      requestedBy: 'SHO Manikandan (POL045)',
       status: 'pending',
       autoPopulated: true,
-      mlScore: 90,
+      mlScore: 94,
       documents: [
         { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
         { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
         { name: 'FIR Copy', source: 'Police Portal', verified: true },
-        { name: 'Community Certificate', source: 'DigiLocker', verified: true }
+        { name: 'Ration Card', source: 'DigiLocker', verified: true }
       ],
-      verificationNotes: 'Excellent data, nearly auto-verified. Minor manual check pending.'
-    },
-    // Additional FIR Cases
+      verificationNotes: 'All documents verified through DigiLocker. Certificate matches revenue records. High confidence score.'
+    }
+  ];
+
+  // Dummy data for All Cases
+  const allCases = [
+    ...pendingVerifications,
     {
-      id: 'VER2024007',
-      requestDate: '2024-10-09 14:30:15',
-      firNumber: 'FIR2024007',
-      firDate: '2024-10-08',
-      policeStation: 'Madurai Central PS',
-      victimName: 'Karthik M',
-      victimDOB: '30-07-1990',
-      aadhaarNumber: '6677 8899 0011',
-      aadhaarVerified: true,
-      caste: 'SC',
-      subCaste: 'Arunthathiyar',
-      casteCertificateNumber: 'SC/MDU/2019/00321',
-      certificateIssueDate: '25-08-2019',
-      issuingAuthority: 'Tahsildar, Madurai',
-      digiLockerStatus: 'verified',
-      revenueVillage: 'Madurai Central',
-      taluk: 'Madurai',
-      district: 'Madurai',
-      requestedBy: 'SHO Senthil (POL025)',
-      status: 'pending',
-      autoPopulated: true,
-      mlScore: 85,
-      documents: [
-        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
-        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
-        { name: 'FIR Copy', source: 'Police Portal', verified: true }
-      ],
-      verificationNotes: 'All documents verified through DigiLocker. Ready for approval.'
-    },
-    {
-      id: 'VER2024008',
-      requestDate: '2024-10-09 10:45:20',
-      firNumber: 'FIR2024008',
-      firDate: '2024-10-07',
-      policeStation: 'Trichy West PS',
-      victimName: 'Geetha R',
-      victimDOB: '12-11-1985',
-      aadhaarNumber: '7788 9900 1122',
-      aadhaarVerified: false,
-      caste: 'ST',
-      subCaste: 'Malayali',
-      casteCertificateNumber: 'ST/TRY/2020/00567',
-      certificateIssueDate: '18-06-2020',
-      issuingAuthority: 'Tahsildar, Trichy',
-      digiLockerStatus: 'partial',
-      revenueVillage: 'Srirangam',
-      taluk: 'Trichy',
-      district: 'Trichy',
-      requestedBy: 'SHO Anand (POL032)',
-      status: 'pending',
-      autoPopulated: false,
-      mlScore: 60,
-      documents: [
-        { name: 'Caste Certificate', source: 'Uploaded PDF', verified: false },
-        { name: 'Aadhaar Card', source: 'Manual Upload', verified: false },
-        { name: 'FIR Copy', source: 'Police Portal', verified: true }
-      ],
-      verificationNotes: 'Manual verification required for caste certificate and Aadhaar.',
-      issues: ['Manual document submission', 'Aadhaar verification pending']
-    },
-    {
-      id: 'VER2024009',
-      requestDate: '2024-10-09 16:20:45',
-      firNumber: 'FIR2024009',
-      firDate: '2024-10-09',
-      policeStation: 'Chennai Central PS',
-      victimName: 'Arun Kumar',
-      victimDOB: '08-03-1992',
-      aadhaarNumber: '8899 0011 2233',
-      aadhaarVerified: true,
+      id: 'VER2023999',
+      requestDate: '2024-10-05 10:15:30',
+      firNumber: 'FIR2023999',
+      firDate: '2024-10-05',
+      policeStation: 'Coimbatore Central PS',
+      victimName: 'Mohan Raj',
+      status: 'completed',
       caste: 'OBC',
-      subCaste: 'Vanniyar',
-      casteCertificateNumber: 'OBC/CHN/2021/00876',
-      certificateIssueDate: '30-04-2021',
-      issuingAuthority: 'Tahsildar, Chennai',
-      digiLockerStatus: 'verified',
-      revenueVillage: 'T Nagar',
-      taluk: 'Chennai',
-      district: 'Chennai',
-      requestedBy: 'SHO Vasanth (POL045)',
-      status: 'pending',
-      autoPopulated: true,
-      mlScore: 89,
-      documents: [
-        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
-        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
-        { name: 'FIR Copy', source: 'Police Portal', verified: true }
-      ],
-      verificationNotes: 'All documents verified. High confidence score.'
+      mlScore: 95
     },
     {
-      id: 'VER2024010',
-      requestDate: '2024-10-09 12:15:30',
-      firNumber: 'FIR2024010',
-      firDate: '2024-10-08',
-      policeStation: 'Coimbatore North PS',
-      victimName: 'Priya S',
-      victimDOB: '19-09-1998',
-      aadhaarNumber: '9900 1122 3344',
-      aadhaarVerified: true,
+      id: 'VER2023998',
+      requestDate: '2024-10-04 14:20:15',
+      firNumber: 'FIR2023998',
+      firDate: '2024-10-04',
+      policeStation: 'Erode West PS',
+      victimName: 'Priya Lakshmi',
+      status: 'completed',
       caste: 'SC',
-      subCaste: 'Devendrakula Vellalar',
-      casteCertificateNumber: 'SC/CBR/2022/00234',
-      certificateIssueDate: '12-03-2022',
-      issuingAuthority: 'Tahsildar, Coimbatore North',
-      digiLockerStatus: 'verified',
-      revenueVillage: 'Gandhipuram',
-      taluk: 'Coimbatore',
-      district: 'Coimbatore',
-      requestedBy: 'SHO Rajesh (POL028)',
-      status: 'pending',
-      autoPopulated: true,
-      mlScore: 91,
-      documents: [
-        { name: 'Caste Certificate', source: 'DigiLocker', verified: true },
-        { name: 'Aadhaar Card', source: 'DigiLocker', verified: true },
-        { name: 'FIR Copy', source: 'Police Portal', verified: true }
-      ],
-      verificationNotes: 'Complete document verification. Ready for fast-track approval.'
+      mlScore: 87
+    }
+  ];
+
+  // Dummy data for Reports
+  const reportsData = {
+    monthlyStats: [
+      { month: 'January', verified: 45, pending: 12, rejected: 3 },
+      { month: 'February', verified: 52, pending: 8, rejected: 2 },
+      { month: 'March', verified: 48, pending: 15, rejected: 4 },
+      { month: 'April', verified: 61, pending: 9, rejected: 1 },
+      { month: 'May', verified: 57, pending: 11, rejected: 2 },
+      { month: 'June', verified: 65, pending: 7, rejected: 3 }
+    ],
+    districtWise: [
+      { district: 'Tiruppur', verified: 215, pending: 23 },
+      { district: 'Coimbatore', verified: 189, pending: 18 },
+      { district: 'Erode', verified: 156, pending: 15 },
+      { district: 'Salem', verified: 142, pending: 12 }
+    ],
+    categoryWise: [
+      { category: 'SC', count: 312, percentage: 45 },
+      { category: 'ST', count: 156, percentage: 22 },
+      { category: 'OBC', count: 225, percentage: 33 }
+    ]
+  };
+
+  // Dummy data for Audit Logs
+  const auditLogs = [
+    {
+      id: 'AUD001',
+      timestamp: '2024-10-09 14:30:22',
+      user: 'Tahsildar Venkatesh (TAH001)',
+      action: 'Case Approved',
+      caseId: 'VER2024001',
+      details: 'Caste certificate verification approved',
+      ipAddress: '192.168.1.100'
+    },
+    {
+      id: 'AUD002',
+      timestamp: '2024-10-09 13:15:10',
+      user: 'Tahsildar Venkatesh (TAH001)',
+      action: 'Document Viewed',
+      caseId: 'VER2024002',
+      details: 'Viewed Aadhaar document',
+      ipAddress: '192.168.1.100'
+    },
+    {
+      id: 'AUD003',
+      timestamp: '2024-10-09 11:45:33',
+      user: 'Tahsildar Venkatesh (TAH001)',
+      action: 'Case Rejected',
+      caseId: 'VER2024003',
+      details: 'Rejected due to insufficient documents',
+      ipAddress: '192.168.1.100'
+    },
+    {
+      id: 'AUD004',
+      timestamp: '2024-10-09 10:20:15',
+      user: 'Tahsildar Venkatesh (TAH001)',
+      action: 'Login',
+      caseId: '-',
+      details: 'User logged into system',
+      ipAddress: '192.168.1.100'
+    },
+    {
+      id: 'AUD005',
+      timestamp: '2024-10-08 16:55:42',
+      user: 'Tahsildar Venkatesh (TAH001)',
+      action: 'Report Generated',
+      caseId: '-',
+      details: 'Monthly verification report downloaded',
+      ipAddress: '192.168.1.100'
     }
   ];
 
@@ -382,10 +301,8 @@ export default function TahsildarDashboard() {
   };
 
   const handleLogout = () => {
-    
-      // Redirect to login page - you can replace this with your actual login page route
-      window.location.href = '/login';
-    
+    // Redirect to login page - you can replace this with your actual login page route
+    window.location.href = '/login';
   };
 
   const fastTrackCases = pendingVerifications.filter(v => v.mlScore >= 85);
@@ -439,6 +356,296 @@ export default function TahsildarDashboard() {
       )}
     </div>
   );
+
+  // Render different views based on activeView state
+  const renderView = () => {
+    switch (activeView) {
+      case 'all-cases':
+        return (
+          <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm p-6`}>
+            <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>All Cases</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                    <th className="text-left py-3 px-4 font-semibold">Case ID</th>
+                    <th className="text-left py-3 px-4 font-semibold">FIR Number</th>
+                    <th className="text-left py-3 px-4 font-semibold">Victim Name</th>
+                    <th className="text-left py-3 px-4 font-semibold">Police Station</th>
+                    <th className="text-left py-3 px-4 font-semibold">Caste</th>
+                    <th className="text-left py-3 px-4 font-semibold">Status</th>
+                    <th className="text-left py-3 px-4 font-semibold">ML Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {allCases.map((caseItem) => (
+                    <tr key={caseItem.id} className={`border-b ${isDarkMode ? 'border-gray-700 hover:bg-gray-750' : 'border-gray-200 hover:bg-gray-50'}`}>
+                      <td className="py-3 px-4">{caseItem.id}</td>
+                      <td className="py-3 px-4">{caseItem.firNumber}</td>
+                      <td className="py-3 px-4">{caseItem.victimName}</td>
+                      <td className="py-3 px-4">{caseItem.policeStation}</td>
+                      <td className="py-3 px-4">{caseItem.caste}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                          caseItem.status === 'completed' ? 'bg-green-100 text-green-800' : 
+                          caseItem.status === 'pending' ? 'bg-orange-100 text-orange-800' : 
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {caseItem.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">{caseItem.mlScore}%</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+
+      case 'reports':
+        return (
+          <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm p-6`}>
+            <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>Reports & Analytics</h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className={`p-4 rounded-lg border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Monthly Statistics</h3>
+                <div className="space-y-2">
+                  {reportsData.monthlyStats.map((stat, index) => (
+                    <div key={index} className="flex justify-between text-sm">
+                      <span className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>{stat.month}</span>
+                      <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>
+                        ✓{stat.verified} • ⏳{stat.pending} • ✗{stat.rejected}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`p-4 rounded-lg border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>District-wise Performance</h3>
+                <div className="space-y-3">
+                  {reportsData.districtWise.map((district, index) => (
+                    <div key={index}>
+                      <div className="flex justify-between text-sm mb-1">
+                        <span className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>{district.district}</span>
+                        <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>{district.verified} verified</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-green-600 h-2 rounded-full" 
+                          style={{ width: `${(district.verified / (district.verified + district.pending)) * 100}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`p-4 rounded-lg border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <h3 className={`text-lg font-semibold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Category Distribution</h3>
+                <div className="space-y-2">
+                  {reportsData.categoryWise.map((category, index) => (
+                    <div key={index} className="flex justify-between text-sm">
+                      <span className={isDarkMode ? 'text-gray-400' : 'text-gray-600'}>{category.category}</span>
+                      <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>
+                        {category.count} ({category.percentage}%)
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className={`p-4 rounded-lg border ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+              <h3 className={`text-lg font-semibold mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Export Reports</h3>
+              <div className="flex space-x-4">
+                <button className={`px-4 py-2 rounded border flex items-center space-x-2 ${
+                  isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
+                }`}>
+                  <Download className="w-4 h-4" />
+                  <span>Monthly Report</span>
+                </button>
+                <button className={`px-4 py-2 rounded border flex items-center space-x-2 ${
+                  isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
+                }`}>
+                  <Download className="w-4 h-4" />
+                  <span>District-wise Report</span>
+                </button>
+                <button className={`px-4 py-2 rounded border flex items-center space-x-2 ${
+                  isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
+                }`}>
+                  <Download className="w-4 h-4" />
+                  <span>Category Analysis</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'audit-logs':
+        return (
+          <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm p-6`}>
+            <h2 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-6`}>Audit Logs</h2>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                    <th className="text-left py-3 px-4 font-semibold">Timestamp</th>
+                    <th className="text-left py-3 px-4 font-semibold">User</th>
+                    <th className="text-left py-3 px-4 font-semibold">Action</th>
+                    <th className="text-left py-3 px-4 font-semibold">Case ID</th>
+                    <th className="text-left py-3 px-4 font-semibold">Details</th>
+                    <th className="text-left py-3 px-4 font-semibold">IP Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {auditLogs.map((log) => (
+                    <tr key={log.id} className={`border-b ${isDarkMode ? 'border-gray-700 hover:bg-gray-750' : 'border-gray-200 hover:bg-gray-50'}`}>
+                      <td className="py-3 px-4">{log.timestamp}</td>
+                      <td className="py-3 px-4">{log.user}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                          log.action.includes('Approved') ? 'bg-green-100 text-green-800' : 
+                          log.action.includes('Rejected') ? 'bg-red-100 text-red-800' : 
+                          'bg-blue-100 text-blue-800'
+                        }`}>
+                          {log.action}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4">{log.caseId}</td>
+                      <td className="py-3 px-4">{log.details}</td>
+                      <td className="py-3 px-4">{log.ipAddress}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        );
+
+      default:
+        return (
+          <>
+            {/* Stats Cards - Removed AVG ML card */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
+              <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center">
+                    <CheckCircle className="w-6 h-6 text-white" />
+                  </div>
+                  <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>FAST-TRACK</span>
+                </div>
+                <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>{fastTrackCases.length}</h3>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Ready for Quick Verification</p>
+                <p className="text-sm text-green-600 font-medium">+55% than last week</p>
+              </div>
+
+              <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-12 h-12 bg-orange-500 rounded flex items-center justify-center">
+                    <AlertTriangle className="w-6 h-6 text-white" />
+                  </div>
+                  <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>MANUAL</span>
+                </div>
+                <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>{manualReviewCases.length}</h3>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Requires Manual Review</p>
+                <p className="text-sm text-red-600 font-medium">-2% than yesterday</p>
+              </div>
+
+              <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="w-12 h-12 bg-blue-500 rounded flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-white" />
+                  </div>
+                  <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>TODAY</span>
+                </div>
+                <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>12</h3>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Cases Verified</p>
+                <p className="text-sm text-green-600 font-medium">+5% than yesterday</p>
+              </div>
+            </div>
+
+            {/* Verification Queue */}
+            <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm`}>
+              <div className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <div className="flex px-1">
+                  <button
+                    onClick={() => setActiveTab('fasttrack')}
+                    className={`flex-1 py-4 px-4 font-semibold text-sm ${
+                      activeTab === 'fasttrack' 
+                        ? 'text-green-600 border-b-2 border-green-600' 
+                        : isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                    }`}
+                  >
+                    Fast-Track Queue ({fastTrackCases.length})
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('manual')}
+                    className={`flex-1 py-4 px-4 font-semibold text-sm ${
+                      activeTab === 'manual' 
+                        ? 'text-green-600 border-b-2 border-green-600' 
+                        : isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                    }`}
+                  >
+                    Manual Review ({manualReviewCases.length})
+                  </button>
+                </div>
+              </div>
+
+              {/* Search Bar */}
+              <div className={`p-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                <div className="flex space-x-3">
+                  <div className="flex-1 relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search by FIR number, victim name, or police station..."
+                      className={`w-full pl-10 pr-4 py-2 border rounded ${
+                        isDarkMode 
+                          ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
+                          : 'bg-white border-gray-300'
+                      } focus:outline-none focus:ring-1 focus:ring-green-500`}
+                    />
+                  </div>
+                  <button className={`px-4 py-2 border rounded flex items-center space-x-2 ${
+                    isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
+                  }`}>
+                    <Filter className="w-4 h-4" />
+                    <span>Filter</span>
+                  </button>
+                  <button className={`px-4 py-2 border rounded flex items-center space-x-2 ${
+                    isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
+                  }`}>
+                    <Download className="w-4 h-4" />
+                    <span>Export</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Cases Grid */}
+              <div className="p-6">
+                {activeTab === 'fasttrack' && (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    {fastTrackCases.map((verification) => (
+                      <VerificationCard key={verification.id} verification={verification} />
+                    ))}
+                  </div>
+                )}
+                {activeTab === 'manual' && (
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                    {manualReviewCases.map((verification) => (
+                      <VerificationCard key={verification.id} verification={verification} />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        );
+    }
+  };
 
   return (
     <div className={`min-h-screen ${isDarkMode ? 'bg-gray-900' : 'bg-gray-100'}`}>
@@ -571,19 +778,39 @@ export default function TahsildarDashboard() {
             </div>
 
             <nav className="space-y-1 mb-6">
-              <button className="w-full flex items-center space-x-3 px-3 py-2.5 bg-gray-800 rounded font-medium text-sm">
+              <button 
+                onClick={() => setActiveView('dashboard')}
+                className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded font-medium text-sm ${
+                  activeView === 'dashboard' ? 'bg-gray-800' : 'hover:bg-gray-800 text-gray-400'
+                }`}
+              >
                 <Home className="w-5 h-5" />
                 <span>Dashboard</span>
               </button>
-              <button className="w-full flex items-center space-x-3 px-3 py-2.5 hover:bg-gray-800 rounded font-medium text-sm text-gray-400">
+              <button 
+                onClick={() => setActiveView('all-cases')}
+                className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded font-medium text-sm ${
+                  activeView === 'all-cases' ? 'bg-gray-800' : 'hover:bg-gray-800 text-gray-400'
+                }`}
+              >
                 <FileText className="w-5 h-5" />
                 <span>All Cases</span>
               </button>
-              <button className="w-full flex items-center space-x-3 px-3 py-2.5 hover:bg-gray-800 rounded font-medium text-sm text-gray-400">
+              <button 
+                onClick={() => setActiveView('reports')}
+                className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded font-medium text-sm ${
+                  activeView === 'reports' ? 'bg-gray-800' : 'hover:bg-gray-800 text-gray-400'
+                }`}
+              >
                 <BarChart3 className="w-5 h-5" />
                 <span>Reports</span>
               </button>
-              <button className="w-full flex items-center space-x-3 px-3 py-2.5 hover:bg-gray-800 rounded font-medium text-sm text-gray-400">
+              <button 
+                onClick={() => setActiveView('audit-logs')}
+                className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded font-medium text-sm ${
+                  activeView === 'audit-logs' ? 'bg-gray-800' : 'hover:bg-gray-800 text-gray-400'
+                }`}
+              >
                 <Activity className="w-5 h-5" />
                 <span>Audit Logs</span>
               </button>
@@ -612,134 +839,7 @@ export default function TahsildarDashboard() {
 
         <main className="flex-1 p-6">
           {!selectedCase ? (
-            <>
-              {/* Stats Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-6">
-                <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center">
-                      <CheckCircle className="w-6 h-6 text-white" />
-                    </div>
-                    <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>FAST-TRACK</span>
-                  </div>
-                  <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>{fastTrackCases.length}</h3>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Ready for Quick Verification</p>
-                  <p className="text-sm text-green-600 font-medium">+55% than last week</p>
-                </div>
-
-                <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-12 h-12 bg-orange-500 rounded flex items-center justify-center">
-                      <AlertTriangle className="w-6 h-6 text-white" />
-                    </div>
-                    <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>MANUAL</span>
-                  </div>
-                  <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>{manualReviewCases.length}</h3>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Requires Manual Review</p>
-                  <p className="text-sm text-red-600 font-medium">-2% than yesterday</p>
-                </div>
-
-                <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-12 h-12 bg-blue-500 rounded flex items-center justify-center">
-                      <TrendingUp className="w-6 h-6 text-white" />
-                    </div>
-                    <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>TODAY</span>
-                  </div>
-                  <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>12</h3>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Cases Verified</p>
-                  <p className="text-sm text-green-600 font-medium">+5% than yesterday</p>
-                </div>
-
-                <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg p-5 shadow-sm`}>
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="w-12 h-12 bg-purple-500 rounded flex items-center justify-center">
-                      <Activity className="w-6 h-6 text-white" />
-                    </div>
-                    <span className={`text-xs font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} uppercase`}>AVG ML</span>
-                  </div>
-                  <h3 className={`text-3xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'} mb-1`}>87%</h3>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mb-2`}>Authenticity Score</p>
-                  <p className="text-sm text-green-600 font-medium">+3% than last month</p>
-                </div>
-              </div>
-
-              {/* Verification Queue */}
-              <div className={`${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm`}>
-                <div className={`border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <div className="flex px-1">
-                    <button
-                      onClick={() => setActiveTab('fasttrack')}
-                      className={`flex-1 py-4 px-4 font-semibold text-sm ${
-                        activeTab === 'fasttrack' 
-                          ? 'text-green-600 border-b-2 border-green-600' 
-                          : isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                      }`}
-                    >
-                      Fast-Track Queue ({fastTrackCases.length})
-                    </button>
-                    <button
-                      onClick={() => setActiveTab('manual')}
-                      className={`flex-1 py-4 px-4 font-semibold text-sm ${
-                        activeTab === 'manual' 
-                          ? 'text-green-600 border-b-2 border-green-600' 
-                          : isDarkMode ? 'text-gray-400' : 'text-gray-600'
-                      }`}
-                    >
-                      Manual Review ({manualReviewCases.length})
-                    </button>
-                  </div>
-                </div>
-
-                {/* Search Bar */}
-                <div className={`p-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-                  <div className="flex space-x-3">
-                    <div className="flex-1 relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      <input
-                        type="text"
-                        placeholder="Search by FIR number, victim name, or police station..."
-                        className={`w-full pl-10 pr-4 py-2 border rounded ${
-                          isDarkMode 
-                            ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' 
-                            : 'bg-white border-gray-300'
-                        } focus:outline-none focus:ring-1 focus:ring-green-500`}
-                      />
-                    </div>
-                    <button className={`px-4 py-2 border rounded flex items-center space-x-2 ${
-                      isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
-                    }`}>
-                      <Filter className="w-4 h-4" />
-                      <span>Filter</span>
-                    </button>
-                    <button className={`px-4 py-2 border rounded flex items-center space-x-2 ${
-                      isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'
-                    }`}>
-                      <Download className="w-4 h-4" />
-                      <span>Export</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Cases Grid */}
-                <div className="p-6">
-                  {activeTab === 'fasttrack' && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                      {fastTrackCases.map((verification) => (
-                        <VerificationCard key={verification.id} verification={verification} />
-                      ))}
-                    </div>
-                  )}
-                  {activeTab === 'manual' && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                      {manualReviewCases.map((verification) => (
-                        <VerificationCard key={verification.id} verification={verification} />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </>
+            renderView()
           ) : (
             /* Detailed Verification View */
             <div>

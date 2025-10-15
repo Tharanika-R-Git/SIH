@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import myLogo from '../assets/my-logo.png';
-import { Shield, Bell, Settings, LogOut, Menu, X, FileText, CheckCircle, AlertTriangle, Clock, Search, Filter, Download, TrendingUp, Users, Activity, Eye, Edit, MessageSquare, Send, ExternalLink, ArrowRight, Home, BarChart3, ChevronRight, AlertCircle as AlertIcon, Hash, FileCheck, Layers, Moon, Sun, Loader, Globe } from 'lucide-react';
+import { Shield, Bell, Settings, LogOut, Menu, X, FileText, CheckCircle, AlertTriangle, Clock, Search, Filter, Download, TrendingUp, Users, Activity, Eye, Edit, MessageSquare, Send, ExternalLink, ArrowRight, Home, BarChart3, ChevronRight, AlertCircle as AlertIcon, Hash, FileCheck, Layers, Moon, Sun, Loader, Globe, User, Mail, Phone, MapPin, Calendar, Badge, Award, Shield as ShieldIcon } from 'lucide-react';
 
 export default function PoliceDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -11,8 +11,9 @@ export default function PoliceDashboard() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [language, setLanguage] = useState('en'); // 'en', 'ta', 'hi'
-  const [currentPage, setCurrentPage] = useState('dashboard'); // 'dashboard', 'all-cases', 'reports', 'audit-logs'
+  const [currentPage, setCurrentPage] = useState('dashboard'); // 'dashboard', 'all-cases', 'reports', 'audit-logs', 'profile'
   const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   // Mock data for fast-track cases (ML Score ≥ 85)
   const fastTrackCases = [
@@ -479,6 +480,39 @@ export default function PoliceDashboard() {
     }
   ];
 
+  // Police Profile Data
+  const policeProfile = {
+    id: 'POL001',
+    name: 'Rajesh Kumar',
+    rank: 'Sub-Inspector of Police',
+    badgeNumber: 'TN39B2021001',
+    station: 'Tiruppur North Police Station',
+    district: 'Tiruppur',
+    state: 'Tamil Nadu',
+    email: 'rajesh.kumar@tnpolice.gov.in',
+    phone: '+91 9876543210',
+    joiningDate: '2021-06-15',
+    experience: '3 years 4 months',
+    casesHandled: 245,
+    successRate: '94.2%',
+    specialization: 'SC/ST Act Cases',
+    awards: [
+      'Best Officer Award 2023',
+      'Community Service Excellence 2022'
+    ],
+    training: [
+      'Advanced SC/ST Act Training (2023)',
+      'Cyber Crime Investigation (2022)',
+      'Forensic Evidence Collection (2021)'
+    ],
+    recentActivity: [
+      'Verified FIR2024001 - Physical Assault Case',
+      'Approved FIR2024009 - Verbal Harassment',
+      'Submitted Monthly Report - October 2024',
+      'Trained New Recruits on DBT Portal'
+    ]
+  };
+
   // Language options
   const languages = [
     { code: 'en', name: 'English', nativeName: 'English' },
@@ -512,6 +546,7 @@ export default function PoliceDashboard() {
   const handleNavigation = (page) => {
     setCurrentPage(page);
     setSelectedCase(null);
+    setShowProfileMenu(false);
   };
 
   const handleLanguageChange = (langCode) => {
@@ -521,13 +556,13 @@ export default function PoliceDashboard() {
     console.log(`Language changed to: ${langCode}`);
   };
 
-  const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      alert('Logging out...');
-      // In real app, you would clear authentication tokens and redirect to login
-      console.log('User logged out');
-    }
-  };
+ const handleLogout = () => {
+ 
+
+    // Use window.location.href for actual redirection
+    window.location.href = '/Login';
+  
+};
 
   // Loading Component
   if (isLoading) {
@@ -1001,6 +1036,189 @@ export default function PoliceDashboard() {
               ))}
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderProfile = () => (
+    <div className="space-y-6">
+      {/* Profile Header */}
+      <div className={`rounded-lg shadow border ${
+        isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+      }`}>
+        <div className="p-6">
+          <div className="flex items-start space-x-6">
+            <div className="w-24 h-24 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
+              {policeProfile.name.split(' ').map(n => n[0]).join('')}
+            </div>
+            <div className="flex-1">
+              <div className="flex items-start justify-between">
+                <div>
+                  <h1 className={`text-2xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {policeProfile.name}
+                  </h1>
+                  <p className={`text-lg ${isDarkMode ? 'text-blue-400' : 'text-blue-600'} font-semibold`}>
+                    {policeProfile.rank}
+                  </p>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} mt-1`}>
+                    {policeProfile.station}, {policeProfile.district}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Badge Number</p>
+                  <p className={`font-mono font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {policeProfile.badgeNumber}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                <div className={`p-3 rounded ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
+                }`}>
+                  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Cases Handled</p>
+                  <p className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {policeProfile.casesHandled}
+                  </p>
+                </div>
+                <div className={`p-3 rounded ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
+                }`}>
+                  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Success Rate</p>
+                  <p className={`text-xl font-bold text-green-600`}>
+                    {policeProfile.successRate}
+                  </p>
+                </div>
+                <div className={`p-3 rounded ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
+                }`}>
+                  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Experience</p>
+                  <p className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {policeProfile.experience}
+                  </p>
+                </div>
+                <div className={`p-3 rounded ${
+                  isDarkMode ? 'bg-gray-700' : 'bg-gray-50'
+                }`}>
+                  <p className={`text-xs ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Specialization</p>
+                  <p className={`text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {policeProfile.specialization}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Personal Information */}
+        <div className={`rounded-lg shadow border ${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}>
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <h2 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              Personal Information
+            </h2>
+          </div>
+          <div className="p-6 space-y-4">
+            <div className="flex items-center space-x-3">
+              <Mail className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Email</p>
+                <p className={isDarkMode ? 'text-white' : 'text-gray-900'}>{policeProfile.email}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Phone className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Phone</p>
+                <p className={isDarkMode ? 'text-white' : 'text-gray-900'}>{policeProfile.phone}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <MapPin className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Station</p>
+                <p className={isDarkMode ? 'text-white' : 'text-gray-900'}>{policeProfile.station}</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Calendar className={`w-5 h-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+              <div>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Joining Date</p>
+                <p className={isDarkMode ? 'text-white' : 'text-gray-900'}>{policeProfile.joiningDate}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Awards & Recognition */}
+        <div className={`rounded-lg shadow border ${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}>
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <h2 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              Awards & Recognition
+            </h2>
+          </div>
+          <div className="p-6">
+            <div className="space-y-3">
+              {policeProfile.awards.map((award, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <Award className={`w-5 h-5 text-yellow-500`} />
+                  <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>{award}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Training & Certifications */}
+        <div className={`rounded-lg shadow border ${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}>
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <h2 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              Training & Certifications
+            </h2>
+          </div>
+          <div className="p-6">
+            <div className="space-y-3">
+              {policeProfile.training.map((training, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <ShieldIcon className={`w-5 h-5 text-green-500`} />
+                  <span className={isDarkMode ? 'text-white' : 'text-gray-900'}>{training}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Recent Activity */}
+        <div className={`rounded-lg shadow border ${
+          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+        }`}>
+          <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+            <h2 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              Recent Activity
+            </h2>
+          </div>
+          <div className="p-6">
+            <div className="space-y-4">
+              {policeProfile.recentActivity.map((activity, index) => (
+                <div key={index} className="flex items-start space-x-3">
+                  <div className={`w-2 h-2 rounded-full mt-2 ${
+                    index === 0 ? 'bg-green-500' : 
+                    index === 1 ? 'bg-blue-500' : 
+                    'bg-purple-500'
+                  }`}></div>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{activity}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1608,6 +1826,8 @@ export default function PoliceDashboard() {
         return renderReports();
       case 'audit-logs':
         return renderAuditLogs();
+      case 'profile':
+        return renderProfile();
       default:
         return renderDashboard();
     }
@@ -1681,15 +1901,6 @@ export default function PoliceDashboard() {
               </div>
               <p className="text-xs text-gray-500">Review required</p>
             </div>
-            
-            {/* Logout Button */}
-            <button 
-              onClick={handleLogout}
-              className="w-full flex items-center space-x-3 px-3 py-2 rounded text-left hover:bg-red-600 hover:text-white transition-colors mt-4"
-            >
-              <LogOut className="w-5 h-5" />
-              {isSidebarOpen && <span>Logout</span>}
-            </button>
           </div>
         )}
       </aside>
@@ -1715,7 +1926,8 @@ export default function PoliceDashboard() {
                   {currentPage === 'dashboard' ? 'Police Dashboard' :
                    currentPage === 'all-cases' ? 'All Cases' :
                    currentPage === 'reports' ? 'Reports & Analytics' :
-                   currentPage === 'audit-logs' ? 'Audit Logs' : 'Police Dashboard'}
+                   currentPage === 'audit-logs' ? 'Audit Logs' : 
+                   currentPage === 'profile' ? 'Police Profile' : 'Police Dashboard'}
                 </h1>
                 <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Tiruppur District</p>
               </div>
@@ -1792,10 +2004,48 @@ export default function PoliceDashboard() {
               }`}>
                 <Settings className={`w-5 h-5 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`} />
               </button>
-              <div className="flex items-center space-x-2">
-                <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                  RK
-                </div>
+              
+              {/* Profile Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
+                  className="flex items-center space-x-2 p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                  <div className="w-9 h-9 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    RK
+                  </div>
+                  <span className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    {policeProfile.name}
+                  </span>
+                </button>
+                
+                {/* Profile Dropdown Menu */}
+                {showProfileMenu && (
+                  <div className={`absolute right-0 top-12 w-48 py-2 rounded-lg shadow-lg border z-50 ${
+                    isDarkMode 
+                      ? 'bg-gray-800 border-gray-700' 
+                      : 'bg-white border-gray-200'
+                  }`}>
+                    <button
+                      onClick={() => handleNavigation('profile')}
+                      className={`w-full px-4 py-2 text-left hover:bg-blue-600 hover:text-white flex items-center space-x-2 ${
+                        isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700'
+                      }`}
+                    >
+                      <User className="w-4 h-4" />
+                      <span>My Profile</span>
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className={`w-full px-4 py-2 text-left hover:bg-red-600 hover:text-white flex items-center space-x-2 ${
+                        isDarkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700'
+                      }`}
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

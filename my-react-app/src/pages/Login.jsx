@@ -20,16 +20,16 @@ export default function DBTOfficialLogin() {
     police: { id: 'police123', password: 'police@123', path: '/police-dashboard' },
     tahsildar: { id: 'tahsildar123', password: 'tahsildar@123', path: '/tahsildar-dashboard' },
     welfare: { id: 'welfare123', password: 'welfare@123', path: '/welfare-dashboard' },
-    collector: { id: 'collector123', password: 'collector@123', path: '/collector-dashboard' },
     treasury: { id: 'treasury123', password: 'treasury@123', path: '/treasury-dashboard' },
+    Admin: { id: 'admin123', password: 'admin@123', path: '/admin-dashboard' },
   };
 
   const officialRoles = [
     { value: 'police', label: 'Police Department', color: 'bg-blue-600' },
     { value: 'tahsildar', label: 'Tahsildar Office', color: 'bg-green-600' },
     { value: 'welfare', label: 'Social Welfare Department', color: 'bg-purple-600' },
-    { value: 'collector', label: 'District Collector', color: 'bg-orange-600' },
     { value: 'treasury', label: 'Treasury Department', color: 'bg-red-600' },
+    { value: 'Admin', label: 'Admin', color: 'bg-orange-600' },
   ];
 
   // ✅ Close dropdown when clicking outside
@@ -42,6 +42,16 @@ export default function DBTOfficialLogin() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // ✅ Auto-fill credentials when official type is selected
+  useEffect(() => {
+    if (officialType && credentials[officialType]) {
+      const user = credentials[officialType];
+      setOfficialId(user.id);
+      setPassword(user.password);
+      setError('');
+    }
+  }, [officialType]);
 
   const triggerErrorAnimation = () => {
     setIsErrorShaking(true);
