@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Bell, TrendingUp, AlertTriangle, FileText, Users, Clock, CheckCircle, XCircle, BarChart3, Map, Download, Eye, Filter, LogOut, Moon, Sun, ChevronLeft, Home, FolderOpen, IndianRupee, X, Calendar, MapPin, User, Phone, Mail } from 'lucide-react';
 import myLogo from '../assets/my-logo.png'; // Adjust the path according to your file structure
+import { useNavigate } from 'react-router-dom';
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('Dashboard');
   const [darkMode, setDarkMode] = useState(false);
   const [selectedCase, setSelectedCase] = useState(null);
   const [showCaseDetails, setShowCaseDetails] = useState(false);
-
+const navigate = useNavigate();
   // Mock data
   const stats = {
     totalCases: 1247,
@@ -180,7 +181,11 @@ export default function AdminDashboard() {
     setSelectedCase(caseData);
     setShowCaseDetails(true);
   };
-
+ const handleLogout = () => {
+  
+    navigate('/Login');
+    
+};
   const CaseDetailsModal = () => {
     if (!selectedCase) return null;
 
