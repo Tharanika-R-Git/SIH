@@ -36,7 +36,8 @@ import {
   UserCheck,
   Clock,
   LogOut,
-  DollarSign
+  DollarSign,
+  CreditCard
 } from "lucide-react";
 import myLogo from '../assets/my-logo.png';
 
@@ -104,6 +105,60 @@ const initialSanctionPackets = [
   }
 ];
 
+// Mock data for payment status
+const paymentStatusData = [
+  {
+    id: 'PS001',
+    beneficiaryName: 'Rajesh Kumar',
+    accountNumber: 'XXXXXX1234',
+    bankName: 'State Bank of India',
+    amount: 50000,
+    status: 'completed',
+    paymentDate: '2025-10-10',
+    utr: 'UTR2025101012345'
+  },
+  {
+    id: 'PS002',
+    beneficiaryName: 'Priya Sharma',
+    accountNumber: 'XXXXXX5678',
+    bankName: 'HDFC Bank',
+    amount: 75000,
+    status: 'in_progress',
+    paymentDate: '2025-10-11',
+    utr: null
+  },
+  {
+    id: 'PS003',
+    beneficiaryName: 'Amit Patel',
+    accountNumber: 'XXXXXX9012',
+    bankName: 'ICICI Bank',
+    amount: 100000,
+    status: 'completed',
+    paymentDate: '2025-10-09',
+    utr: 'UTR2025100987654'
+  },
+  {
+    id: 'PS004',
+    beneficiaryName: 'Sunita Devi',
+    accountNumber: 'XXXXXX3456',
+    bankName: 'Punjab National Bank',
+    amount: 25000,
+    status: 'failed',
+    paymentDate: '2025-10-08',
+    utr: null
+  },
+  {
+    id: 'PS005',
+    beneficiaryName: 'Lakshmi Iyer',
+    accountNumber: 'XXXXXX7890',
+    bankName: 'Axis Bank',
+    amount: 60000,
+    status: 'completed',
+    paymentDate: '2025-10-07',
+    utr: 'UTR2025100754321'
+  }
+];
+
 // Chart data
 const monthlyData = [
   { month: "Jan", disbursed: 45, pending: 25, failed: 5, amount: 1250000 },
@@ -134,6 +189,7 @@ const TreasuryDBTPortal = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [paymentSearchTerm, setPaymentSearchTerm] = useState('');
 
   const [packets, setPackets] = useState(initialSanctionPackets);
 
@@ -166,11 +222,19 @@ const TreasuryDBTPortal = () => {
     });
   }, [packets, searchTerm, filterStatus]);
 
+  const filteredPaymentStatus = useMemo(() => {
+    return paymentStatusData.filter(p => 
+      p.beneficiaryName.toLowerCase().includes(paymentSearchTerm.toLowerCase()) ||
+      p.accountNumber.toLowerCase().includes(paymentSearchTerm.toLowerCase())
+    );
+  }, [paymentSearchTerm]);
+
   const translations = {
     en: {
       welcome: "Welcome, Treasury Officer",
       dashboard: "Dashboard",
       packets: "All Packets",
+      paymentStatus: "Payment Status",
       reports: "Reports",
       quickActions: "Quick Actions",
       notifications: "Notifications",
@@ -179,6 +243,7 @@ const TreasuryDBTPortal = () => {
       welcome: "स्वागत है, ट्रेजरी अधिकारी",
       dashboard: "डैशबोर्ड",
       packets: "सभी पैकेट",
+      paymentStatus: "भुगतान स्थिति",
       reports: "रिपोर्ट",
       quickActions: "त्वरित कार्य",
       notifications: "सूचनाएं",
@@ -227,6 +292,11 @@ const TreasuryDBTPortal = () => {
     a.href = url;
     a.download = `treasury_report_${Date.now()}.csv`;
     a.click();
+  };
+
+  const handleRedirectToPFMS = (beneficiary) => {
+    // Redirect to PFMS website
+    window.open('https://pfms.nic.in/static/NewLayoutCommonContent.aspx?RequestPagename=Static/FAQ.aspx', '_blank');
   };
 
   // Custom Dialog Component
@@ -347,6 +417,7 @@ const TreasuryDBTPortal = () => {
           {[
             { id: "dashboard", icon: Home, label: t.dashboard },
             { id: "packets", icon: FolderOpen, label: t.packets },
+            { id: "paymentStatus", icon: CreditCard, label: t.paymentStatus },
             { id: "reports", icon: BarChart3, label: t.reports },
           ].map((item) => (
             <button
@@ -689,6 +760,98 @@ const TreasuryDBTPortal = () => {
             </div>
           )}
 
+          {/* PAYMENT STATUS SECTION */}
+          {activeTab === "paymentStatus" && (
+            <div className="space-y-6">
+              <div className="flex justify-between items-center">
+                <h2 className="text-2xl font-bold">Payment Status</h2>
+                <div className="flex gap-4">
+                  <select className={`px-4 py-2 rounded-lg ${cardBg} border ${borderClass}`}>
+                    <option>All Status</option>
+                    <option>Completed</option>
+                    <option>In Progress</option>
+                    <option>Failed</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Search */}
+              <div className={`${cardBg} p-6 rounded-xl shadow-md border ${borderClass}`}>
+                <div className="relative max-w-md">
+                  <Search className={`w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 ${textSecondary}`} />
+                  <input
+                    type="text"
+                    placeholder="Search by Beneficiary Name or Account Number..."
+                    value={paymentSearchTerm}
+                    onChange={(e) => setPaymentSearchTerm(e.target.value)}
+                    className={`w-full pl-10 pr-4 py-2 border ${borderClass} rounded-lg ${darkMode ? 'bg-gray-700 text-white' : 'bg-white text-gray-900'}`}
+                  />
+                </div>
+              </div>
+              
+              <Card className="p-6">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left">
+                    <thead>
+                      <tr className={`border-b ${borderClass}`}>
+                        <th className="py-3 px-4 font-semibold">Beneficiary Name</th>
+                        <th className="py-3 px-4 font-semibold">Account Number</th>
+                        <th className="py-3 px-4 font-semibold">Bank Name</th>
+                        <th className="py-3 px-4 font-semibold">Amount</th>
+                        <th className="py-3 px-4 font-semibold">Status</th>
+                        <th className="py-3 px-4 font-semibold">Payment Date</th>
+                        <th className="py-3 px-4 font-semibold">UTR Number</th>
+                        <th className="py-3 px-4 font-semibold">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredPaymentStatus.map((payment) => (
+                        <tr 
+                          key={payment.id} 
+                          className={`border-b ${borderClass} hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors`}
+                        >
+                          <td className="py-3 px-4 font-medium text-blue-600 dark:text-blue-400">
+                            {payment.beneficiaryName}
+                          </td>
+                          <td className="py-3 px-4 font-mono">{payment.accountNumber}</td>
+                          <td className="py-3 px-4">{payment.bankName}</td>
+                          <td className="py-3 px-4 font-medium">₹{payment.amount.toLocaleString()}</td>
+                          <td className="py-3 px-4">
+                            <span
+                              className={`px-3 py-1 rounded-full text-sm font-medium ${
+                                payment.status === "completed"
+                                  ? "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300"
+                                  : payment.status === "failed"
+                                  ? "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300"
+                                  : "bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300"
+                              }`}
+                            >
+                              {payment.status === "completed" ? "Completed" : 
+                               payment.status === "in_progress" ? "In Progress" : "Failed"}
+                            </span>
+                          </td>
+                          <td className="py-3 px-4">{payment.paymentDate}</td>
+                          <td className="py-3 px-4 font-mono">
+                            {payment.utr || "N/A"}
+                          </td>
+                          <td className="py-3 px-4">
+                            <button 
+                              onClick={() => handleRedirectToPFMS(payment)}
+                              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm"
+                            >
+                              <Eye size={16} />
+                              View in PFMS
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </Card>
+            </div>
+          )}
+
           {/* REPORTS SECTION */}
           {activeTab === "reports" && (
             <div className="space-y-6">
@@ -835,7 +998,8 @@ const TreasuryDBTPortal = () => {
               </div>
               <Button className="mt-4 w-full" onClick={() => setIsDialogOpen(false)}>
                 Close
-              </Button>
+              </Button> 
+
             </div>
           )}
         </DialogContent>
